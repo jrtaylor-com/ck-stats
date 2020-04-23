@@ -1,65 +1,190 @@
 <html>
 	<head>
-		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>	
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>	
+ 
 	</head>
 	<body>
+        <div id="stat-container">
+            
+        </div>
+        <script>
+            var clabels = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Nineth', 'Tenth'];
+            var clabelmasters = ['Masterhood'];
+            var clabelsExtra = ['Unspecified Rank'].concat(clabels);
+            var cbgcolors = {
+                            1980: 'rgba(255, 99, 132, 0.2)',
+                            1981: 'rgba(54, 162, 235, 0.2)',
+                            1982: 'rgba(255, 206, 86, 0.2)',
+                            1983: 'rgba(75, 192, 192, 0.2)',
+                            1984: 'rgba(153, 102, 255, 0.2)',
+                            1985: 'rgba(35, 102, 180, 0.2)',
+                            1986: 'rgba(22, 102, 66, 0.2)',
+                            1987: 'rgba(44, 20, 255, 0.2)',
+                            1988: 'rgba(153, 102, 85, 0.2)',
+                            1989: 'rgba(255, 159, 64, 0.2)',
+                            1990: 'rgba(255, 99, 132, 0.2)',
+                            1991: 'rgba(54, 162, 235, 0.2)',
+                            1992: 'rgba(255, 206, 86, 0.2)',
+                            1993: 'rgba(75, 192, 192, 0.2)',
+                            1994: 'rgba(153, 102, 255, 0.2)',
+                            1995: 'rgba(35, 102, 180, 0.2)',
+                            1996: 'rgba(22, 102, 66, 0.2)',
+                            1997: 'rgba(44, 20, 255, 0.2)',
+                            1998: 'rgba(153, 102, 85, 0.2)',
+                            1999: 'rgba(255, 159, 64, 0.2)',
+                            2000: 'rgba(255, 99, 132, 0.2)',
+                            2001: 'rgba(54, 162, 235, 0.2)',
+                            2002: 'rgba(255, 206, 86, 0.2)',
+                            2003: 'rgba(75, 192, 192, 0.2)',
+                            2004: 'rgba(153, 102, 255, 0.2)',
+                            2005: 'rgba(35, 102, 180, 0.2)',
+                            2006: 'rgba(22, 102, 66, 0.2)',
+                            2007: 'rgba(44, 20, 255, 0.2)',
+                            2008: 'rgba(153, 102, 85, 0.2)',
+                            2009: 'rgba(255, 159, 64, 0.2)',
+                            2010: 'rgba(255, 99, 132, 0.2)',
+                            2011: 'rgba(54, 162, 235, 0.2)',
+                            2012: 'rgba(255, 206, 86, 0.2)',
+                            2013: 'rgba(75, 192, 192, 0.2)',
+                            2014: 'rgba(153, 102, 255, 0.2)',
+                            2015: 'rgba(35, 102, 180, 0.2)',
+                            2016: 'rgba(22, 102, 66, 0.2)',
+                            2017: 'rgba(44, 20, 255, 0.2)',
+                            2018: 'rgba(153, 102, 85, 0.2)',
+                            2019: 'rgba(255, 159, 64, 0.2)'
+        };
+
+            var cbccolors = {
+                            1980: 'rgba(255, 99, 132)',
+                            1981: 'rgba(54, 162, 235)',
+                            1982: 'rgba(255, 206, 86)',
+                            1983: 'rgba(75, 192, 192)',
+                            1984: 'rgba(153, 102, 255)',
+                            1985: 'rgba(35, 102, 180)',
+                            1986: 'rgba(22, 102, 66)',
+                            1987: 'rgba(44, 20, 255)',
+                            1988: 'rgba(153, 102, 85)',
+                            1989: 'rgba(255, 159, 64)',
+                            1990: 'rgba(255, 99, 132)',
+                            1991: 'rgba(54, 162, 235)',
+                            1992: 'rgba(255, 206, 862)',
+                            1993: 'rgba(75, 192, 192)',
+                            1994: 'rgba(153, 102, 255)',
+                            1995: 'rgba(35, 102, 180)',
+                            1996: 'rgba(22, 102, 66)',
+                            1997: 'rgba(44, 20, 255)',
+                            1998: 'rgba(153, 102, 85)',
+                            1999: 'rgba(255, 159, 64)',
+                            2000: 'rgba(255, 99, 132)',
+                            2001: 'rgba(54, 162, 235)',
+                            2002: 'rgba(255, 206, 86)',
+                            2003: 'rgba(75, 192, 192)',
+                            2004: 'rgba(153, 102, 255)',
+                            2005: 'rgba(35, 102, 180)',
+                            2006: 'rgba(22, 102, 66)',
+                            2007: 'rgba(44, 20, 255)',
+                            2008: 'rgba(153, 102, 85)',
+                            2009: 'rgba(255, 159, 64)',
+                            2010: 'rgba(255, 99, 132)',
+                            2011: 'rgba(54, 162, 235)',
+                            2012: 'rgba(255, 206, 86)',
+                            2013: 'rgba(75, 192, 192)',
+                            2014: 'rgba(153, 102, 255)',
+                            2015: 'rgba(35, 102, 180)',
+                            2016: 'rgba(22, 102, 66)',
+                            2017: 'rgba(44, 20, 255)',
+                            2018: 'rgba(153, 102, 85)',
+                            2019: 'rgba(255, 159, 64)'
+            };
+
+            var data = JSON.parse('[{"rank":0,"name":"Master Crown","cnt":1,"yr":2019},{"rank":10,"name":"Master Crown","cnt":7,"yr":2019},{"rank":0,"name":"Master Garber","cnt":1,"yr":2019},{"rank":0,"name":"Master Owl","cnt":1,"yr":2019},{"rank":0,"name":"Master Rose","cnt":2,"yr":2019},{"rank":0,"name":"Master Smith","cnt":1,"yr":2019},{"rank":1,"name":"Order of the Crown","cnt":27,"yr":2019},{"rank":2,"name":"Order of the Crown","cnt":19,"yr":2019},{"rank":3,"name":"Order of the Crown","cnt":8,"yr":2019},{"rank":4,"name":"Order of the Crown","cnt":8,"yr":2019},{"rank":5,"name":"Order of the Crown","cnt":7,"yr":2019},{"rank":6,"name":"Order of the Crown","cnt":5,"yr":2019},{"rank":7,"name":"Order of the Crown","cnt":1,"yr":2019},{"rank":8,"name":"Order of the Crown","cnt":6,"yr":2019},{"rank":9,"name":"Order of the Crown","cnt":3,"yr":2019},{"rank":10,"name":"Order of the Crown","cnt":4,"yr":2019},{"rank":1,"name":"Order of the Dragon","cnt":30,"yr":2019},{"rank":2,"name":"Order of the Dragon","cnt":20,"yr":2019},{"rank":3,"name":"Order of the Dragon","cnt":15,"yr":2019},{"rank":4,"name":"Order of the Dragon","cnt":12,"yr":2019},{"rank":5,"name":"Order of the Dragon","cnt":6,"yr":2019},{"rank":6,"name":"Order of the Dragon","cnt":3,"yr":2019},{"rank":7,"name":"Order of the Dragon","cnt":5,"yr":2019},{"rank":8,"name":"Order of the Dragon","cnt":4,"yr":2019},{"rank":9,"name":"Order of the Dragon","cnt":3,"yr":2019},{"rank":10,"name":"Order of the Dragon","cnt":1,"yr":2019},{"rank":0,"name":"Order of the Flame","cnt":29,"yr":2019},{"rank":0,"name":"Order of the Garber","cnt":2,"yr":2019},{"rank":1,"name":"Order of the Garber","cnt":9,"yr":2019},{"rank":2,"name":"Order of the Garber","cnt":9,"yr":2019},{"rank":3,"name":"Order of the Garber","cnt":7,"yr":2019},{"rank":4,"name":"Order of the Garber","cnt":4,"yr":2019},{"rank":5,"name":"Order of the Garber","cnt":3,"yr":2019},{"rank":6,"name":"Order of the Garber","cnt":2,"yr":2019},{"rank":9,"name":"Order of the Garber","cnt":2,"yr":2019},{"rank":1,"name":"Order of the Griffin","cnt":17,"yr":2019},{"rank":2,"name":"Order of the Griffin","cnt":5,"yr":2019},{"rank":3,"name":"Order of the Griffin","cnt":5,"yr":2019},{"rank":5,"name":"Order of the Griffin","cnt":1,"yr":2019},{"rank":1,"name":"Order of the Hydra","cnt":5,"yr":2019},{"rank":4,"name":"Order of the Hydra","cnt":1,"yr":2019},{"rank":6,"name":"Order of the Hydra","cnt":2,"yr":2019},{"rank":0,"name":"Order of the Jovius","cnt":2,"yr":2019},{"rank":1,"name":"Order of the Jovius","cnt":5,"yr":2019},{"rank":1,"name":"Order of the Lion","cnt":11,"yr":2019},{"rank":2,"name":"Order of the Lion","cnt":14,"yr":2019},{"rank":3,"name":"Order of the Lion","cnt":5,"yr":2019},{"rank":4,"name":"Order of the Lion","cnt":2,"yr":2019},{"rank":5,"name":"Order of the Lion","cnt":1,"yr":2019},{"rank":6,"name":"Order of the Lion","cnt":3,"yr":2019},{"rank":7,"name":"Order of the Lion","cnt":1,"yr":2019},{"rank":8,"name":"Order of the Lion","cnt":1,"yr":2019},{"rank":9,"name":"Order of the Lion","cnt":1,"yr":2019},{"rank":1,"name":"Order of the Mask","cnt":3,"yr":2019},{"rank":2,"name":"Order of the Mask","cnt":1,"yr":2019},{"rank":0,"name":"Order of the Owl","cnt":1,"yr":2019},{"rank":1,"name":"Order of the Owl","cnt":15,"yr":2019},{"rank":2,"name":"Order of the Owl","cnt":19,"yr":2019},{"rank":3,"name":"Order of the Owl","cnt":12,"yr":2019},{"rank":4,"name":"Order of the Owl","cnt":11,"yr":2019},{"rank":5,"name":"Order of the Owl","cnt":10,"yr":2019},{"rank":6,"name":"Order of the Owl","cnt":4,"yr":2019},{"rank":9,"name":"Order of the Owl","cnt":1,"yr":2019},{"rank":0,"name":"Order of the Rose","cnt":2,"yr":2019},{"rank":1,"name":"Order of the Rose","cnt":43,"yr":2019},{"rank":2,"name":"Order of the Rose","cnt":35,"yr":2019},{"rank":3,"name":"Order of the Rose","cnt":23,"yr":2019},{"rank":4,"name":"Order of the Rose","cnt":22,"yr":2019},{"rank":5,"name":"Order of the Rose","cnt":12,"yr":2019},{"rank":6,"name":"Order of the Rose","cnt":8,"yr":2019},{"rank":7,"name":"Order of the Rose","cnt":6,"yr":2019},{"rank":8,"name":"Order of the Rose","cnt":3,"yr":2019},{"rank":9,"name":"Order of the Rose","cnt":3,"yr":2019},{"rank":10,"name":"Order of the Rose","cnt":2,"yr":2019},{"rank":1,"name":"Order of the Smith","cnt":12,"yr":2019},{"rank":2,"name":"Order of the Smith","cnt":12,"yr":2019},{"rank":3,"name":"Order of the Smith","cnt":13,"yr":2019},{"rank":4,"name":"Order of the Smith","cnt":5,"yr":2019},{"rank":5,"name":"Order of the Smith","cnt":1,"yr":2019},{"rank":6,"name":"Order of the Smith","cnt":2,"yr":2019},{"rank":0,"name":"Order of the Warrior","cnt":8,"yr":2019},{"rank":1,"name":"Order of the Warrior","cnt":40,"yr":2019},{"rank":2,"name":"Order of the Warrior","cnt":35,"yr":2019},{"rank":3,"name":"Order of the Warrior","cnt":27,"yr":2019},{"rank":4,"name":"Order of the Warrior","cnt":16,"yr":2019},{"rank":5,"name":"Order of the Warrior","cnt":9,"yr":2019},{"rank":6,"name":"Order of the Warrior","cnt":6,"yr":2019},{"rank":7,"name":"Order of the Warrior","cnt":2,"yr":2019},{"rank":8,"name":"Order of the Warrior","cnt":1,"yr":2019},{"rank":9,"name":"Order of the Warrior","cnt":1,"yr":2019},{"rank":10,"name":"Order of the Warrior","cnt":2,"yr":2019},{"rank":0,"name":"Order of the Zodiac","cnt":2,"yr":2019},{"rank":1,"name":"Order of the Zodiac","cnt":1,"yr":2019},{"rank":0,"name":"Warlord","cnt":2,"yr":2019},{"rank":0,"name":"Master Dragon","cnt":1,"yr":2018},{"rank":1,"name":"Master Dragon","cnt":1,"yr":2018},{"rank":0,"name":"Master Garber","cnt":1,"yr":2018},{"rank":0,"name":"Master Lion","cnt":1,"yr":2018},{"rank":0,"name":"Master Rose","cnt":3,"yr":2018},{"rank":0,"name":"Master Smith","cnt":1,"yr":2018},{"rank":1,"name":"Order of the Dragon","cnt":35,"yr":2018},{"rank":2,"name":"Order of the Dragon","cnt":24,"yr":2018},{"rank":3,"name":"Order of the Dragon","cnt":18,"yr":2018},{"rank":4,"name":"Order of the Dragon","cnt":10,"yr":2018},{"rank":5,"name":"Order of the Dragon","cnt":7,"yr":2018},{"rank":6,"name":"Order of the Dragon","cnt":6,"yr":2018},{"rank":7,"name":"Order of the Dragon","cnt":3,"yr":2018},{"rank":8,"name":"Order of the Dragon","cnt":1,"yr":2018},{"rank":10,"name":"Order of the Dragon","cnt":2,"yr":2018},{"rank":1,"name":"Order of the Garber","cnt":13,"yr":2018},{"rank":2,"name":"Order of the Garber","cnt":8,"yr":2018},{"rank":3,"name":"Order of the Garber","cnt":7,"yr":2018},{"rank":4,"name":"Order of the Garber","cnt":5,"yr":2018},{"rank":5,"name":"Order of the Garber","cnt":5,"yr":2018},{"rank":6,"name":"Order of the Garber","cnt":1,"yr":2018},{"rank":7,"name":"Order of the Garber","cnt":3,"yr":2018},{"rank":8,"name":"Order of the Garber","cnt":2,"yr":2018},{"rank":10,"name":"Order of the Garber","cnt":1,"yr":2018},{"rank":0,"name":"Order of the Griffin","cnt":1,"yr":2018},{"rank":1,"name":"Order of the Griffin","cnt":13,"yr":2018},{"rank":2,"name":"Order of the Griffin","cnt":4,"yr":2018},{"rank":3,"name":"Order of the Griffin","cnt":1,"yr":2018},{"rank":0,"name":"Order of the Hydra","cnt":2,"yr":2018},{"rank":1,"name":"Order of the Hydra","cnt":4,"yr":2018},{"rank":2,"name":"Order of the Hydra","cnt":1,"yr":2018},{"rank":3,"name":"Order of the Hydra","cnt":1,"yr":2018},{"rank":0,"name":"Order of the Jovius","cnt":2,"yr":2018},{"rank":1,"name":"Order of the Jovius","cnt":3,"yr":2018},{"rank":2,"name":"Order of the Jovius","cnt":2,"yr":2018},{"rank":1,"name":"Order of the Lion","cnt":15,"yr":2018},{"rank":2,"name":"Order of the Lion","cnt":9,"yr":2018},{"rank":3,"name":"Order of the Lion","cnt":9,"yr":2018},{"rank":4,"name":"Order of the Lion","cnt":3,"yr":2018},{"rank":5,"name":"Order of the Lion","cnt":2,"yr":2018},{"rank":6,"name":"Order of the Lion","cnt":1,"yr":2018},{"rank":9,"name":"Order of the Lion","cnt":1,"yr":2018},{"rank":10,"name":"Order of the Lion","cnt":1,"yr":2018},{"rank":0,"name":"Order of the Mask","cnt":2,"yr":2018},{"rank":1,"name":"Order of the Mask","cnt":3,"yr":2018},{"rank":5,"name":"Order of the Mask","cnt":2,"yr":2018},{"rank":0,"name":"Order of the Owl","cnt":1,"yr":2018},{"rank":1,"name":"Order of the Owl","cnt":18,"yr":2018},{"rank":2,"name":"Order of the Owl","cnt":11,"yr":2018},{"rank":3,"name":"Order of the Owl","cnt":8,"yr":2018},{"rank":4,"name":"Order of the Owl","cnt":6,"yr":2018},{"rank":5,"name":"Order of the Owl","cnt":3,"yr":2018},{"rank":6,"name":"Order of the Owl","cnt":1,"yr":2018},{"rank":7,"name":"Order of the Owl","cnt":3,"yr":2018},{"rank":9,"name":"Order of the Owl","cnt":1,"yr":2018},{"rank":10,"name":"Order of the Owl","cnt":1,"yr":2018},{"rank":1,"name":"Order of the Rose","cnt":43,"yr":2018},{"rank":2,"name":"Order of the Rose","cnt":24,"yr":2018},{"rank":3,"name":"Order of the Rose","cnt":19,"yr":2018},{"rank":4,"name":"Order of the Rose","cnt":11,"yr":2018},{"rank":5,"name":"Order of the Rose","cnt":15,"yr":2018},{"rank":6,"name":"Order of the Rose","cnt":9,"yr":2018},{"rank":7,"name":"Order of the Rose","cnt":2,"yr":2018},{"rank":8,"name":"Order of the Rose","cnt":1,"yr":2018},{"rank":9,"name":"Order of the Rose","cnt":1,"yr":2018},{"rank":10,"name":"Order of the Rose","cnt":4,"yr":2018},{"rank":1,"name":"Order of the Smith","cnt":15,"yr":2018},{"rank":2,"name":"Order of the Smith","cnt":7,"yr":2018},{"rank":3,"name":"Order of the Smith","cnt":5,"yr":2018},{"rank":5,"name":"Order of the Smith","cnt":1,"yr":2018},{"rank":9,"name":"Order of the Smith","cnt":1,"yr":2018},{"rank":10,"name":"Order of the Smith","cnt":1,"yr":2018},{"rank":1,"name":"Order of the Warrior","cnt":37,"yr":2018},{"rank":2,"name":"Order of the Warrior","cnt":27,"yr":2018},{"rank":3,"name":"Order of the Warrior","cnt":17,"yr":2018},{"rank":4,"name":"Order of the Warrior","cnt":14,"yr":2018},{"rank":5,"name":"Order of the Warrior","cnt":10,"yr":2018},{"rank":6,"name":"Order of the Warrior","cnt":2,"yr":2018},{"rank":7,"name":"Order of the Warrior","cnt":4,"yr":2018},{"rank":8,"name":"Order of the Warrior","cnt":2,"yr":2018},{"rank":9,"name":"Order of the Warrior","cnt":1,"yr":2018},{"rank":0,"name":"Order of the Zodiac","cnt":6,"yr":2018},{"rank":1,"name":"Order of the Zodiac","cnt":6,"yr":2018},{"rank":0,"name":"Master Rose","cnt":1,"yr":2017},{"rank":0,"name":"Master Smith","cnt":1,"yr":2017},{"rank":1,"name":"Order of the Dragon","cnt":34,"yr":2017},{"rank":2,"name":"Order of the Dragon","cnt":22,"yr":2017},{"rank":3,"name":"Order of the Dragon","cnt":13,"yr":2017},{"rank":4,"name":"Order of the Dragon","cnt":13,"yr":2017},{"rank":5,"name":"Order of the Dragon","cnt":10,"yr":2017},{"rank":6,"name":"Order of the Dragon","cnt":7,"yr":2017},{"rank":7,"name":"Order of the Dragon","cnt":2,"yr":2017},{"rank":8,"name":"Order of the Dragon","cnt":3,"yr":2017},{"rank":9,"name":"Order of the Dragon","cnt":4,"yr":2017},{"rank":1,"name":"Order of the Flame","cnt":1,"yr":2017},{"rank":2,"name":"Order of the Flame","cnt":1,"yr":2017},{"rank":1,"name":"Order of the Garber","cnt":20,"yr":2017},{"rank":2,"name":"Order of the Garber","cnt":8,"yr":2017},{"rank":3,"name":"Order of the Garber","cnt":10,"yr":2017},{"rank":4,"name":"Order of the Garber","cnt":8,"yr":2017},{"rank":9,"name":"Order of the Garber","cnt":1,"yr":2017},{"rank":0,"name":"Order of the Griffin","cnt":7,"yr":2017},{"rank":1,"name":"Order of the Griffin","cnt":5,"yr":2017},{"rank":2,"name":"Order of the Griffin","cnt":1,"yr":2017},{"rank":8,"name":"Order of the Griffin","cnt":1,"yr":2017},{"rank":0,"name":"Order of the Hydra","cnt":3,"yr":2017},{"rank":0,"name":"Order of the Jovius","cnt":2,"yr":2017},{"rank":1,"name":"Order of the Jovius","cnt":3,"yr":2017},{"rank":2,"name":"Order of the Jovius","cnt":1,"yr":2017},{"rank":1,"name":"Order of the Lion","cnt":9,"yr":2017},{"rank":2,"name":"Order of the Lion","cnt":4,"yr":2017},{"rank":3,"name":"Order of the Lion","cnt":8,"yr":2017},{"rank":4,"name":"Order of the Lion","cnt":2,"yr":2017},{"rank":5,"name":"Order of the Lion","cnt":1,"yr":2017},{"rank":8,"name":"Order of the Lion","cnt":1,"yr":2017},{"rank":0,"name":"Order of the Mask","cnt":1,"yr":2017},{"rank":1,"name":"Order of the Mask","cnt":1,"yr":2017},{"rank":1,"name":"Order of the Owl","cnt":25,"yr":2017},{"rank":2,"name":"Order of the Owl","cnt":20,"yr":2017},{"rank":3,"name":"Order of the Owl","cnt":16,"yr":2017},{"rank":4,"name":"Order of the Owl","cnt":9,"yr":2017},{"rank":5,"name":"Order of the Owl","cnt":4,"yr":2017},{"rank":6,"name":"Order of the Owl","cnt":8,"yr":2017},{"rank":7,"name":"Order of the Owl","cnt":1,"yr":2017},{"rank":8,"name":"Order of the Owl","cnt":1,"yr":2017},{"rank":1,"name":"Order of the Rose","cnt":39,"yr":2017},{"rank":2,"name":"Order of the Rose","cnt":24,"yr":2017},{"rank":3,"name":"Order of the Rose","cnt":19,"yr":2017},{"rank":4,"name":"Order of the Rose","cnt":15,"yr":2017},{"rank":5,"name":"Order of the Rose","cnt":9,"yr":2017},{"rank":6,"name":"Order of the Rose","cnt":11,"yr":2017},{"rank":7,"name":"Order of the Rose","cnt":5,"yr":2017},{"rank":8,"name":"Order of the Rose","cnt":5,"yr":2017},{"rank":9,"name":"Order of the Rose","cnt":3,"yr":2017},{"rank":10,"name":"Order of the Rose","cnt":1,"yr":2017},{"rank":0,"name":"Order of the Smith","cnt":1,"yr":2017},{"rank":1,"name":"Order of the Smith","cnt":11,"yr":2017},{"rank":2,"name":"Order of the Smith","cnt":7,"yr":2017},{"rank":3,"name":"Order of the Smith","cnt":1,"yr":2017},{"rank":4,"name":"Order of the Smith","cnt":1,"yr":2017},{"rank":5,"name":"Order of the Smith","cnt":3,"yr":2017},{"rank":6,"name":"Order of the Smith","cnt":1,"yr":2017},{"rank":8,"name":"Order of the Smith","cnt":1,"yr":2017},{"rank":0,"name":"Order of the Walker in the Middle","cnt":1,"yr":2017},{"rank":1,"name":"Order of the Warrior","cnt":46,"yr":2017},{"rank":2,"name":"Order of the Warrior","cnt":23,"yr":2017},{"rank":3,"name":"Order of the Warrior","cnt":6,"yr":2017},{"rank":4,"name":"Order of the Warrior","cnt":4,"yr":2017},{"rank":5,"name":"Order of the Warrior","cnt":4,"yr":2017},{"rank":6,"name":"Order of the Warrior","cnt":4,"yr":2017},{"rank":0,"name":"Order of the Zodiac","cnt":2,"yr":2017},{"rank":0,"name":"Warlord","cnt":1,"yr":2017},{"rank":0,"name":"Master Owl","cnt":1,"yr":2016},{"rank":0,"name":"Master Rose","cnt":2,"yr":2016},{"rank":0,"name":"Master Smith","cnt":1,"yr":2016},{"rank":1,"name":"Order of the Dragon","cnt":21,"yr":2016},{"rank":2,"name":"Order of the Dragon","cnt":14,"yr":2016},{"rank":3,"name":"Order of the Dragon","cnt":9,"yr":2016},{"rank":4,"name":"Order of the Dragon","cnt":8,"yr":2016},{"rank":5,"name":"Order of the Dragon","cnt":4,"yr":2016},{"rank":6,"name":"Order of the Dragon","cnt":4,"yr":2016},{"rank":7,"name":"Order of the Dragon","cnt":3,"yr":2016},{"rank":8,"name":"Order of the Dragon","cnt":1,"yr":2016},{"rank":1,"name":"Order of the Garber","cnt":20,"yr":2016},{"rank":2,"name":"Order of the Garber","cnt":13,"yr":2016},{"rank":3,"name":"Order of the Garber","cnt":8,"yr":2016},{"rank":4,"name":"Order of the Garber","cnt":3,"yr":2016},{"rank":5,"name":"Order of the Garber","cnt":1,"yr":2016},{"rank":6,"name":"Order of the Garber","cnt":1,"yr":2016},{"rank":7,"name":"Order of the Garber","cnt":1,"yr":2016},{"rank":8,"name":"Order of the Garber","cnt":1,"yr":2016},{"rank":9,"name":"Order of the Garber","cnt":1,"yr":2016},{"rank":0,"name":"Order of the Griffin","cnt":3,"yr":2016},{"rank":1,"name":"Order of the Griffin","cnt":13,"yr":2016},{"rank":2,"name":"Order of the Griffin","cnt":1,"yr":2016},{"rank":3,"name":"Order of the Griffin","cnt":1,"yr":2016},{"rank":1,"name":"Order of the Hydra","cnt":2,"yr":2016},{"rank":0,"name":"Order of the Jovius","cnt":3,"yr":2016},{"rank":1,"name":"Order of the Jovius","cnt":1,"yr":2016},{"rank":0,"name":"Order of the Lion","cnt":1,"yr":2016},{"rank":1,"name":"Order of the Lion","cnt":20,"yr":2016},{"rank":2,"name":"Order of the Lion","cnt":6,"yr":2016},{"rank":3,"name":"Order of the Lion","cnt":1,"yr":2016},{"rank":0,"name":"Order of the Mask","cnt":3,"yr":2016},{"rank":1,"name":"Order of the Owl","cnt":29,"yr":2016},{"rank":2,"name":"Order of the Owl","cnt":18,"yr":2016},{"rank":3,"name":"Order of the Owl","cnt":6,"yr":2016},{"rank":4,"name":"Order of the Owl","cnt":5,"yr":2016},{"rank":5,"name":"Order of the Owl","cnt":1,"yr":2016},{"rank":10,"name":"Order of the Owl","cnt":1,"yr":2016},{"rank":1,"name":"Order of the Rose","cnt":28,"yr":2016},{"rank":2,"name":"Order of the Rose","cnt":19,"yr":2016},{"rank":3,"name":"Order of the Rose","cnt":14,"yr":2016},{"rank":4,"name":"Order of the Rose","cnt":9,"yr":2016},{"rank":5,"name":"Order of the Rose","cnt":8,"yr":2016},{"rank":6,"name":"Order of the Rose","cnt":7,"yr":2016},{"rank":7,"name":"Order of the Rose","cnt":5,"yr":2016},{"rank":8,"name":"Order of the Rose","cnt":2,"yr":2016},{"rank":9,"name":"Order of the Rose","cnt":2,"yr":2016},{"rank":10,"name":"Order of the Rose","cnt":1,"yr":2016},{"rank":1,"name":"Order of the Smith","cnt":14,"yr":2016},{"rank":2,"name":"Order of the Smith","cnt":7,"yr":2016},{"rank":3,"name":"Order of the Smith","cnt":1,"yr":2016},{"rank":4,"name":"Order of the Smith","cnt":1,"yr":2016},{"rank":9,"name":"Order of the Smith","cnt":1,"yr":2016},{"rank":10,"name":"Order of the Smith","cnt":1,"yr":2016},{"rank":1,"name":"Order of the Warrior","cnt":33,"yr":2016},{"rank":2,"name":"Order of the Warrior","cnt":13,"yr":2016},{"rank":3,"name":"Order of the Warrior","cnt":9,"yr":2016},{"rank":4,"name":"Order of the Warrior","cnt":5,"yr":2016},{"rank":5,"name":"Order of the Warrior","cnt":5,"yr":2016},{"rank":6,"name":"Order of the Warrior","cnt":2,"yr":2016},{"rank":7,"name":"Order of the Warrior","cnt":1,"yr":2016},{"rank":8,"name":"Order of the Warrior","cnt":1,"yr":2016},{"rank":9,"name":"Order of the Warrior","cnt":1,"yr":2016},{"rank":0,"name":"Order of the Zodiac","cnt":9,"yr":2016},{"rank":0,"name":"Master Rose","cnt":2,"yr":2015},{"rank":1,"name":"Order of the Dragon","cnt":33,"yr":2015},{"rank":2,"name":"Order of the Dragon","cnt":20,"yr":2015},{"rank":3,"name":"Order of the Dragon","cnt":9,"yr":2015},{"rank":4,"name":"Order of the Dragon","cnt":9,"yr":2015},{"rank":5,"name":"Order of the Dragon","cnt":2,"yr":2015},{"rank":6,"name":"Order of the Dragon","cnt":1,"yr":2015},{"rank":7,"name":"Order of the Dragon","cnt":1,"yr":2015},{"rank":0,"name":"Order of the Garber","cnt":2,"yr":2015},{"rank":1,"name":"Order of the Garber","cnt":16,"yr":2015},{"rank":2,"name":"Order of the Garber","cnt":8,"yr":2015},{"rank":3,"name":"Order of the Garber","cnt":3,"yr":2015},{"rank":4,"name":"Order of the Garber","cnt":2,"yr":2015},{"rank":5,"name":"Order of the Garber","cnt":3,"yr":2015},{"rank":8,"name":"Order of the Garber","cnt":1,"yr":2015},{"rank":0,"name":"Order of the Griffin","cnt":1,"yr":2015},{"rank":1,"name":"Order of the Griffin","cnt":4,"yr":2015},{"rank":1,"name":"Order of the Hydra","cnt":2,"yr":2015},{"rank":2,"name":"Order of the Hydra","cnt":1,"yr":2015},{"rank":3,"name":"Order of the Hydra","cnt":1,"yr":2015},{"rank":9,"name":"Order of the Hydra","cnt":1,"yr":2015},{"rank":0,"name":"Order of the Jovius","cnt":1,"yr":2015},{"rank":1,"name":"Order of the Jovius","cnt":3,"yr":2015},{"rank":1,"name":"Order of the Lion","cnt":2,"yr":2015},{"rank":2,"name":"Order of the Lion","cnt":3,"yr":2015},{"rank":3,"name":"Order of the Lion","cnt":3,"yr":2015},{"rank":4,"name":"Order of the Lion","cnt":3,"yr":2015},{"rank":5,"name":"Order of the Lion","cnt":2,"yr":2015},{"rank":6,"name":"Order of the Lion","cnt":1,"yr":2015},{"rank":0,"name":"Order of the Mask","cnt":2,"yr":2015},{"rank":1,"name":"Order of the Mask","cnt":2,"yr":2015},{"rank":2,"name":"Order of the Mask","cnt":1,"yr":2015},{"rank":1,"name":"Order of the Owl","cnt":26,"yr":2015},{"rank":2,"name":"Order of the Owl","cnt":18,"yr":2015},{"rank":3,"name":"Order of the Owl","cnt":9,"yr":2015},{"rank":4,"name":"Order of the Owl","cnt":3,"yr":2015},{"rank":5,"name":"Order of the Owl","cnt":3,"yr":2015},{"rank":0,"name":"Order of the Rose","cnt":2,"yr":2015},{"rank":1,"name":"Order of the Rose","cnt":36,"yr":2015},{"rank":2,"name":"Order of the Rose","cnt":32,"yr":2015},{"rank":3,"name":"Order of the Rose","cnt":18,"yr":2015},{"rank":4,"name":"Order of the Rose","cnt":16,"yr":2015},{"rank":5,"name":"Order of the Rose","cnt":13,"yr":2015},{"rank":6,"name":"Order of the Rose","cnt":4,"yr":2015},{"rank":7,"name":"Order of the Rose","cnt":4,"yr":2015},{"rank":8,"name":"Order of the Rose","cnt":2,"yr":2015},{"rank":9,"name":"Order of the Rose","cnt":1,"yr":2015},{"rank":10,"name":"Order of the Rose","cnt":2,"yr":2015},{"rank":1,"name":"Order of the Smith","cnt":10,"yr":2015},{"rank":2,"name":"Order of the Smith","cnt":6,"yr":2015},{"rank":3,"name":"Order of the Smith","cnt":2,"yr":2015},{"rank":4,"name":"Order of the Smith","cnt":1,"yr":2015},{"rank":5,"name":"Order of the Smith","cnt":2,"yr":2015},{"rank":6,"name":"Order of the Smith","cnt":1,"yr":2015},{"rank":7,"name":"Order of the Smith","cnt":1,"yr":2015},{"rank":8,"name":"Order of the Smith","cnt":1,"yr":2015},{"rank":9,"name":"Order of the Smith","cnt":2,"yr":2015},{"rank":0,"name":"Order of the Walker in the Middle","cnt":1,"yr":2015},{"rank":0,"name":"Order of the Warrior","cnt":1,"yr":2015},{"rank":1,"name":"Order of the Warrior","cnt":37,"yr":2015},{"rank":2,"name":"Order of the Warrior","cnt":21,"yr":2015},{"rank":3,"name":"Order of the Warrior","cnt":17,"yr":2015},{"rank":4,"name":"Order of the Warrior","cnt":7,"yr":2015},{"rank":5,"name":"Order of the Warrior","cnt":3,"yr":2015},{"rank":6,"name":"Order of the Warrior","cnt":1,"yr":2015},{"rank":0,"name":"Order of the Zodiac","cnt":4,"yr":2015},{"rank":1,"name":"Order of the Zodiac","cnt":2,"yr":2015},{"rank":2,"name":"Order of the Zodiac","cnt":1,"yr":2015},{"rank":0,"name":"Master Rose","cnt":3,"yr":2014},{"rank":0,"name":"Order of the Dragon","cnt":4,"yr":2014},{"rank":1,"name":"Order of the Dragon","cnt":22,"yr":2014},{"rank":2,"name":"Order of the Dragon","cnt":10,"yr":2014},{"rank":3,"name":"Order of the Dragon","cnt":9,"yr":2014},{"rank":4,"name":"Order of the Dragon","cnt":6,"yr":2014},{"rank":5,"name":"Order of the Dragon","cnt":4,"yr":2014},{"rank":6,"name":"Order of the Dragon","cnt":6,"yr":2014},{"rank":8,"name":"Order of the Dragon","cnt":1,"yr":2014},{"rank":9,"name":"Order of the Dragon","cnt":1,"yr":2014},{"rank":1,"name":"Order of the Garber","cnt":14,"yr":2014},{"rank":2,"name":"Order of the Garber","cnt":7,"yr":2014},{"rank":3,"name":"Order of the Garber","cnt":6,"yr":2014},{"rank":4,"name":"Order of the Garber","cnt":4,"yr":2014},{"rank":5,"name":"Order of the Garber","cnt":3,"yr":2014},{"rank":6,"name":"Order of the Garber","cnt":1,"yr":2014},{"rank":7,"name":"Order of the Garber","cnt":1,"yr":2014},{"rank":0,"name":"Order of the Griffin","cnt":3,"yr":2014},{"rank":1,"name":"Order of the Griffin","cnt":4,"yr":2014},{"rank":2,"name":"Order of the Griffin","cnt":2,"yr":2014},{"rank":4,"name":"Order of the Griffin","cnt":1,"yr":2014},{"rank":0,"name":"Order of the Hydra","cnt":3,"yr":2014},{"rank":2,"name":"Order of the Hydra","cnt":1,"yr":2014},{"rank":0,"name":"Order of the Jovius","cnt":1,"yr":2014},{"rank":1,"name":"Order of the Jovius","cnt":4,"yr":2014},{"rank":1,"name":"Order of the Lion","cnt":13,"yr":2014},{"rank":2,"name":"Order of the Lion","cnt":6,"yr":2014},{"rank":3,"name":"Order of the Lion","cnt":2,"yr":2014},{"rank":7,"name":"Order of the Lion","cnt":2,"yr":2014},{"rank":8,"name":"Order of the Lion","cnt":1,"yr":2014},{"rank":0,"name":"Order of the Mask","cnt":4,"yr":2014},{"rank":1,"name":"Order of the Mask","cnt":7,"yr":2014},{"rank":2,"name":"Order of the Mask","cnt":1,"yr":2014},{"rank":3,"name":"Order of the Mask","cnt":1,"yr":2014},{"rank":1,"name":"Order of the Owl","cnt":34,"yr":2014},{"rank":2,"name":"Order of the Owl","cnt":11,"yr":2014},{"rank":3,"name":"Order of the Owl","cnt":5,"yr":2014},{"rank":4,"name":"Order of the Owl","cnt":5,"yr":2014},{"rank":5,"name":"Order of the Owl","cnt":2,"yr":2014},{"rank":8,"name":"Order of the Owl","cnt":1,"yr":2014},{"rank":9,"name":"Order of the Owl","cnt":2,"yr":2014},{"rank":0,"name":"Order of the Rose","cnt":9,"yr":2014},{"rank":1,"name":"Order of the Rose","cnt":40,"yr":2014},{"rank":2,"name":"Order of the Rose","cnt":21,"yr":2014},{"rank":3,"name":"Order of the Rose","cnt":11,"yr":2014},{"rank":4,"name":"Order of the Rose","cnt":10,"yr":2014},{"rank":5,"name":"Order of the Rose","cnt":9,"yr":2014},{"rank":6,"name":"Order of the Rose","cnt":7,"yr":2014},{"rank":8,"name":"Order of the Rose","cnt":2,"yr":2014},{"rank":9,"name":"Order of the Rose","cnt":4,"yr":2014},{"rank":10,"name":"Order of the Rose","cnt":3,"yr":2014},{"rank":0,"name":"Order of the Smith","cnt":1,"yr":2014},{"rank":1,"name":"Order of the Smith","cnt":13,"yr":2014},{"rank":2,"name":"Order of the Smith","cnt":9,"yr":2014},{"rank":3,"name":"Order of the Smith","cnt":6,"yr":2014},{"rank":4,"name":"Order of the Smith","cnt":5,"yr":2014},{"rank":5,"name":"Order of the Smith","cnt":1,"yr":2014},{"rank":6,"name":"Order of the Smith","cnt":1,"yr":2014},{"rank":1,"name":"Order of the Warrior","cnt":35,"yr":2014},{"rank":2,"name":"Order of the Warrior","cnt":13,"yr":2014},{"rank":3,"name":"Order of the Warrior","cnt":10,"yr":2014},{"rank":4,"name":"Order of the Warrior","cnt":6,"yr":2014},{"rank":5,"name":"Order of the Warrior","cnt":2,"yr":2014},{"rank":6,"name":"Order of the Warrior","cnt":1,"yr":2014},{"rank":7,"name":"Order of the Warrior","cnt":2,"yr":2014},{"rank":8,"name":"Order of the Warrior","cnt":2,"yr":2014},{"rank":9,"name":"Order of the Warrior","cnt":1,"yr":2014},{"rank":10,"name":"Order of the Warrior","cnt":2,"yr":2014},{"rank":0,"name":"Order of the Zodiac","cnt":2,"yr":2014},{"rank":1,"name":"Order of the Zodiac","cnt":2,"yr":2014},{"rank":2,"name":"Order of the Zodiac","cnt":1,"yr":2014},{"rank":0,"name":"Warlord","cnt":2,"yr":2014},{"rank":0,"name":"Master Rose","cnt":3,"yr":2013},{"rank":0,"name":"Order of the Dragon","cnt":37,"yr":2013},{"rank":1,"name":"Order of the Dragon","cnt":9,"yr":2013},{"rank":2,"name":"Order of the Dragon","cnt":3,"yr":2013},{"rank":3,"name":"Order of the Dragon","cnt":4,"yr":2013},{"rank":4,"name":"Order of the Dragon","cnt":1,"yr":2013},{"rank":5,"name":"Order of the Dragon","cnt":2,"yr":2013},{"rank":7,"name":"Order of the Dragon","cnt":2,"yr":2013},{"rank":0,"name":"Order of the Garber","cnt":21,"yr":2013},{"rank":1,"name":"Order of the Garber","cnt":5,"yr":2013},{"rank":2,"name":"Order of the Garber","cnt":6,"yr":2013},{"rank":3,"name":"Order of the Garber","cnt":2,"yr":2013},{"rank":5,"name":"Order of the Garber","cnt":1,"yr":2013},{"rank":0,"name":"Order of the Griffin","cnt":7,"yr":2013},{"rank":1,"name":"Order of the Griffin","cnt":7,"yr":2013},{"rank":2,"name":"Order of the Griffin","cnt":5,"yr":2013},{"rank":3,"name":"Order of the Griffin","cnt":2,"yr":2013},{"rank":0,"name":"Order of the Hydra","cnt":6,"yr":2013},{"rank":0,"name":"Order of the Jovius","cnt":1,"yr":2013},{"rank":1,"name":"Order of the Jovius","cnt":2,"yr":2013},{"rank":0,"name":"Order of the Lion","cnt":41,"yr":2013},{"rank":1,"name":"Order of the Lion","cnt":14,"yr":2013},{"rank":2,"name":"Order of the Lion","cnt":8,"yr":2013},{"rank":3,"name":"Order of the Lion","cnt":3,"yr":2013},{"rank":4,"name":"Order of the Lion","cnt":1,"yr":2013},{"rank":5,"name":"Order of the Lion","cnt":1,"yr":2013},{"rank":6,"name":"Order of the Lion","cnt":1,"yr":2013},{"rank":7,"name":"Order of the Lion","cnt":1,"yr":2013},{"rank":0,"name":"Order of the Mask","cnt":3,"yr":2013},{"rank":0,"name":"Order of the Owl","cnt":35,"yr":2013},{"rank":1,"name":"Order of the Owl","cnt":5,"yr":2013},{"rank":2,"name":"Order of the Owl","cnt":4,"yr":2013},{"rank":3,"name":"Order of the Owl","cnt":4,"yr":2013},{"rank":4,"name":"Order of the Owl","cnt":1,"yr":2013},{"rank":7,"name":"Order of the Owl","cnt":1,"yr":2013},{"rank":0,"name":"Order of the Rose","cnt":47,"yr":2013},{"rank":1,"name":"Order of the Rose","cnt":11,"yr":2013},{"rank":2,"name":"Order of the Rose","cnt":10,"yr":2013},{"rank":3,"name":"Order of the Rose","cnt":7,"yr":2013},{"rank":4,"name":"Order of the Rose","cnt":9,"yr":2013},{"rank":5,"name":"Order of the Rose","cnt":2,"yr":2013},{"rank":6,"name":"Order of the Rose","cnt":3,"yr":2013},{"rank":7,"name":"Order of the Rose","cnt":4,"yr":2013},{"rank":8,"name":"Order of the Rose","cnt":1,"yr":2013},{"rank":9,"name":"Order of the Rose","cnt":4,"yr":2013},{"rank":10,"name":"Order of the Rose","cnt":1,"yr":2013},{"rank":0,"name":"Order of the Smith","cnt":10,"yr":2013},{"rank":1,"name":"Order of the Smith","cnt":8,"yr":2013},{"rank":2,"name":"Order of the Smith","cnt":5,"yr":2013},{"rank":3,"name":"Order of the Smith","cnt":3,"yr":2013},{"rank":6,"name":"Order of the Smith","cnt":1,"yr":2013},{"rank":7,"name":"Order of the Smith","cnt":2,"yr":2013},{"rank":8,"name":"Order of the Smith","cnt":1,"yr":2013},{"rank":0,"name":"Order of the Warrior","cnt":30,"yr":2013},{"rank":1,"name":"Order of the Warrior","cnt":10,"yr":2013},{"rank":2,"name":"Order of the Warrior","cnt":8,"yr":2013},{"rank":3,"name":"Order of the Warrior","cnt":7,"yr":2013},{"rank":4,"name":"Order of the Warrior","cnt":6,"yr":2013},{"rank":6,"name":"Order of the Warrior","cnt":2,"yr":2013},{"rank":7,"name":"Order of the Warrior","cnt":1,"yr":2013},{"rank":0,"name":"Order of the Zodiac","cnt":8,"yr":2013},{"rank":0,"name":"Order of the Dragon","cnt":36,"yr":2012},{"rank":1,"name":"Order of the Dragon","cnt":5,"yr":2012},{"rank":2,"name":"Order of the Dragon","cnt":3,"yr":2012},{"rank":0,"name":"Order of the Flame","cnt":17,"yr":2012},{"rank":1,"name":"Order of the Flame","cnt":1,"yr":2012},{"rank":0,"name":"Order of the Garber","cnt":19,"yr":2012},{"rank":1,"name":"Order of the Garber","cnt":5,"yr":2012},{"rank":2,"name":"Order of the Garber","cnt":2,"yr":2012},{"rank":3,"name":"Order of the Garber","cnt":2,"yr":2012},{"rank":4,"name":"Order of the Garber","cnt":3,"yr":2012},{"rank":0,"name":"Order of the Griffin","cnt":12,"yr":2012},{"rank":1,"name":"Order of the Griffin","cnt":2,"yr":2012},{"rank":3,"name":"Order of the Griffin","cnt":1,"yr":2012},{"rank":0,"name":"Order of the Hydra","cnt":1,"yr":2012},{"rank":0,"name":"Order of the Jovius","cnt":1,"yr":2012},{"rank":0,"name":"Order of the Lion","cnt":16,"yr":2012},{"rank":1,"name":"Order of the Lion","cnt":5,"yr":2012},{"rank":2,"name":"Order of the Lion","cnt":4,"yr":2012},{"rank":3,"name":"Order of the Lion","cnt":1,"yr":2012},{"rank":0,"name":"Order of the Mask","cnt":7,"yr":2012},{"rank":2,"name":"Order of the Mask","cnt":1,"yr":2012},{"rank":0,"name":"Order of the Owl","cnt":45,"yr":2012},{"rank":1,"name":"Order of the Owl","cnt":2,"yr":2012},{"rank":2,"name":"Order of the Owl","cnt":3,"yr":2012},{"rank":3,"name":"Order of the Owl","cnt":1,"yr":2012},{"rank":4,"name":"Order of the Owl","cnt":1,"yr":2012},{"rank":0,"name":"Order of the Rose","cnt":81,"yr":2012},{"rank":1,"name":"Order of the Rose","cnt":7,"yr":2012},{"rank":2,"name":"Order of the Rose","cnt":3,"yr":2012},{"rank":3,"name":"Order of the Rose","cnt":3,"yr":2012},{"rank":4,"name":"Order of the Rose","cnt":1,"yr":2012},{"rank":6,"name":"Order of the Rose","cnt":1,"yr":2012},{"rank":0,"name":"Order of the Smith","cnt":13,"yr":2012},{"rank":1,"name":"Order of the Smith","cnt":5,"yr":2012},{"rank":2,"name":"Order of the Smith","cnt":3,"yr":2012},{"rank":4,"name":"Order of the Smith","cnt":1,"yr":2012},{"rank":5,"name":"Order of the Smith","cnt":1,"yr":2012},{"rank":6,"name":"Order of the Smith","cnt":1,"yr":2012},{"rank":0,"name":"Order of the Warrior","cnt":62,"yr":2012},{"rank":1,"name":"Order of the Warrior","cnt":4,"yr":2012},{"rank":2,"name":"Order of the Warrior","cnt":6,"yr":2012},{"rank":3,"name":"Order of the Warrior","cnt":1,"yr":2012},{"rank":0,"name":"Order of the Zodiac","cnt":5,"yr":2012},{"rank":0,"name":"Master Rose","cnt":3,"yr":2011},{"rank":0,"name":"Order of the Dragon","cnt":62,"yr":2011},{"rank":1,"name":"Order of the Dragon","cnt":1,"yr":2011},{"rank":7,"name":"Order of the Dragon","cnt":2,"yr":2011},{"rank":8,"name":"Order of the Dragon","cnt":2,"yr":2011},{"rank":0,"name":"Order of the Garber","cnt":27,"yr":2011},{"rank":1,"name":"Order of the Garber","cnt":2,"yr":2011},{"rank":2,"name":"Order of the Garber","cnt":1,"yr":2011},{"rank":3,"name":"Order of the Garber","cnt":2,"yr":2011},{"rank":4,"name":"Order of the Garber","cnt":1,"yr":2011},{"rank":5,"name":"Order of the Garber","cnt":2,"yr":2011},{"rank":0,"name":"Order of the Griffin","cnt":9,"yr":2011},{"rank":1,"name":"Order of the Griffin","cnt":1,"yr":2011},{"rank":0,"name":"Order of the Lion","cnt":25,"yr":2011},{"rank":1,"name":"Order of the Lion","cnt":4,"yr":2011},{"rank":2,"name":"Order of the Lion","cnt":1,"yr":2011},{"rank":0,"name":"Order of the Mask","cnt":2,"yr":2011},{"rank":1,"name":"Order of the Mask","cnt":1,"yr":2011},{"rank":2,"name":"Order of the Mask","cnt":1,"yr":2011},{"rank":0,"name":"Order of the Owl","cnt":50,"yr":2011},{"rank":1,"name":"Order of the Owl","cnt":5,"yr":2011},{"rank":2,"name":"Order of the Owl","cnt":2,"yr":2011},{"rank":7,"name":"Order of the Owl","cnt":2,"yr":2011},{"rank":8,"name":"Order of the Owl","cnt":1,"yr":2011},{"rank":0,"name":"Order of the Rose","cnt":96,"yr":2011},{"rank":1,"name":"Order of the Rose","cnt":2,"yr":2011},{"rank":2,"name":"Order of the Rose","cnt":4,"yr":2011},{"rank":3,"name":"Order of the Rose","cnt":3,"yr":2011},{"rank":8,"name":"Order of the Rose","cnt":1,"yr":2011},{"rank":9,"name":"Order of the Rose","cnt":1,"yr":2011},{"rank":10,"name":"Order of the Rose","cnt":1,"yr":2011},{"rank":0,"name":"Order of the Smith","cnt":15,"yr":2011},{"rank":1,"name":"Order of the Smith","cnt":2,"yr":2011},{"rank":2,"name":"Order of the Smith","cnt":1,"yr":2011},{"rank":3,"name":"Order of the Smith","cnt":1,"yr":2011},{"rank":0,"name":"Order of the Walker in the Middle","cnt":1,"yr":2011},{"rank":0,"name":"Order of the Warrior","cnt":33,"yr":2011},{"rank":1,"name":"Order of the Warrior","cnt":4,"yr":2011},{"rank":2,"name":"Order of the Warrior","cnt":1,"yr":2011},{"rank":4,"name":"Order of the Warrior","cnt":1,"yr":2011},{"rank":5,"name":"Order of the Warrior","cnt":2,"yr":2011},{"rank":0,"name":"Warlord","cnt":1,"yr":2011},{"rank":0,"name":"Master Dragon","cnt":1,"yr":2010},{"rank":0,"name":"Order of the Dragon","cnt":55,"yr":2010},{"rank":1,"name":"Order of the Dragon","cnt":2,"yr":2010},{"rank":2,"name":"Order of the Dragon","cnt":2,"yr":2010},{"rank":3,"name":"Order of the Dragon","cnt":1,"yr":2010},{"rank":4,"name":"Order of the Dragon","cnt":1,"yr":2010},{"rank":5,"name":"Order of the Dragon","cnt":1,"yr":2010},{"rank":0,"name":"Order of the Garber","cnt":31,"yr":2010},{"rank":1,"name":"Order of the Garber","cnt":3,"yr":2010},{"rank":2,"name":"Order of the Garber","cnt":1,"yr":2010},{"rank":0,"name":"Order of the Griffin","cnt":5,"yr":2010},{"rank":0,"name":"Order of the Hydra","cnt":3,"yr":2010},{"rank":0,"name":"Order of the Jovius","cnt":1,"yr":2010},{"rank":0,"name":"Order of the Lion","cnt":20,"yr":2010},{"rank":1,"name":"Order of the Lion","cnt":2,"yr":2010},{"rank":0,"name":"Order of the Mask","cnt":1,"yr":2010},{"rank":0,"name":"Order of the Owl","cnt":36,"yr":2010},{"rank":1,"name":"Order of the Owl","cnt":1,"yr":2010},{"rank":5,"name":"Order of the Owl","cnt":1,"yr":2010},{"rank":6,"name":"Order of the Owl","cnt":1,"yr":2010},{"rank":0,"name":"Order of the Rose","cnt":92,"yr":2010},{"rank":1,"name":"Order of the Rose","cnt":4,"yr":2010},{"rank":4,"name":"Order of the Rose","cnt":1,"yr":2010},{"rank":5,"name":"Order of the Rose","cnt":1,"yr":2010},{"rank":6,"name":"Order of the Rose","cnt":1,"yr":2010},{"rank":7,"name":"Order of the Rose","cnt":1,"yr":2010},{"rank":0,"name":"Order of the Smith","cnt":18,"yr":2010},{"rank":1,"name":"Order of the Smith","cnt":1,"yr":2010},{"rank":0,"name":"Order of the Warrior","cnt":47,"yr":2010},{"rank":1,"name":"Order of the Warrior","cnt":1,"yr":2010},{"rank":3,"name":"Order of the Warrior","cnt":1,"yr":2010},{"rank":5,"name":"Order of the Warrior","cnt":1,"yr":2010},{"rank":0,"name":"Order of the Zodiac","cnt":3,"yr":2010},{"rank":0,"name":"Master Rose","cnt":3,"yr":2009},{"rank":0,"name":"Order of the Dragon","cnt":36,"yr":2009},{"rank":1,"name":"Order of the Dragon","cnt":1,"yr":2009},{"rank":9,"name":"Order of the Dragon","cnt":1,"yr":2009},{"rank":0,"name":"Order of the Flame","cnt":12,"yr":2009},{"rank":1,"name":"Order of the Flame","cnt":1,"yr":2009},{"rank":0,"name":"Order of the Garber","cnt":16,"yr":2009},{"rank":1,"name":"Order of the Garber","cnt":1,"yr":2009},{"rank":2,"name":"Order of the Garber","cnt":1,"yr":2009},{"rank":0,"name":"Order of the Griffin","cnt":5,"yr":2009},{"rank":0,"name":"Order of the Hydra","cnt":5,"yr":2009},{"rank":1,"name":"Order of the Hydra","cnt":1,"yr":2009},{"rank":0,"name":"Order of the Lion","cnt":19,"yr":2009},{"rank":1,"name":"Order of the Lion","cnt":2,"yr":2009},{"rank":4,"name":"Order of the Lion","cnt":1,"yr":2009},{"rank":0,"name":"Order of the Mask","cnt":4,"yr":2009},{"rank":1,"name":"Order of the Mask","cnt":1,"yr":2009},{"rank":0,"name":"Order of the Owl","cnt":19,"yr":2009},{"rank":1,"name":"Order of the Owl","cnt":1,"yr":2009},{"rank":0,"name":"Order of the Rose","cnt":71,"yr":2009},{"rank":2,"name":"Order of the Rose","cnt":2,"yr":2009},{"rank":3,"name":"Order of the Rose","cnt":1,"yr":2009},{"rank":4,"name":"Order of the Rose","cnt":1,"yr":2009},{"rank":0,"name":"Order of the Smith","cnt":21,"yr":2009},{"rank":0,"name":"Order of the Warrior","cnt":33,"yr":2009},{"rank":2,"name":"Order of the Warrior","cnt":1,"yr":2009},{"rank":3,"name":"Order of the Warrior","cnt":1,"yr":2009},{"rank":4,"name":"Order of the Warrior","cnt":1,"yr":2009},{"rank":0,"name":"Order of the Zodiac","cnt":3,"yr":2009},{"rank":0,"name":"Warlord","cnt":1,"yr":2009},{"rank":0,"name":"Master Rose","cnt":4,"yr":2008},{"rank":0,"name":"Master Smith","cnt":1,"yr":2008},{"rank":0,"name":"Order of the Dragon","cnt":46,"yr":2008},{"rank":1,"name":"Order of the Dragon","cnt":1,"yr":2008},{"rank":5,"name":"Order of the Dragon","cnt":1,"yr":2008},{"rank":0,"name":"Order of the Flame","cnt":2,"yr":2008},{"rank":0,"name":"Order of the Garber","cnt":35,"yr":2008},{"rank":1,"name":"Order of the Garber","cnt":3,"yr":2008},{"rank":2,"name":"Order of the Garber","cnt":1,"yr":2008},{"rank":0,"name":"Order of the Griffin","cnt":6,"yr":2008},{"rank":0,"name":"Order of the Hydra","cnt":2,"yr":2008},{"rank":0,"name":"Order of the Jovius","cnt":6,"yr":2008},{"rank":0,"name":"Order of the Lion","cnt":54,"yr":2008},{"rank":1,"name":"Order of the Lion","cnt":2,"yr":2008},{"rank":0,"name":"Order of the Mask","cnt":6,"yr":2008},{"rank":0,"name":"Order of the Owl","cnt":51,"yr":2008},{"rank":1,"name":"Order of the Owl","cnt":1,"yr":2008},{"rank":2,"name":"Order of the Owl","cnt":1,"yr":2008},{"rank":3,"name":"Order of the Owl","cnt":1,"yr":2008},{"rank":4,"name":"Order of the Owl","cnt":1,"yr":2008},{"rank":0,"name":"Order of the Rose","cnt":122,"yr":2008},{"rank":1,"name":"Order of the Rose","cnt":2,"yr":2008},{"rank":2,"name":"Order of the Rose","cnt":4,"yr":2008},{"rank":3,"name":"Order of the Rose","cnt":2,"yr":2008},{"rank":0,"name":"Order of the Smith","cnt":16,"yr":2008},{"rank":1,"name":"Order of the Smith","cnt":1,"yr":2008},{"rank":0,"name":"Order of the Walker in the Middle","cnt":1,"yr":2008},{"rank":0,"name":"Order of the Warrior","cnt":51,"yr":2008},{"rank":1,"name":"Order of the Warrior","cnt":1,"yr":2008},{"rank":2,"name":"Order of the Warrior","cnt":1,"yr":2008},{"rank":3,"name":"Order of the Warrior","cnt":1,"yr":2008},{"rank":4,"name":"Order of the Warrior","cnt":1,"yr":2008},{"rank":0,"name":"Order of the Zodiac","cnt":4,"yr":2008},{"rank":0,"name":"Master Dragon","cnt":1,"yr":2007},{"rank":0,"name":"Master Owl","cnt":1,"yr":2007},{"rank":0,"name":"Master Rose","cnt":3,"yr":2007},{"rank":0,"name":"Order of the Dragon","cnt":49,"yr":2007},{"rank":1,"name":"Order of the Dragon","cnt":1,"yr":2007},{"rank":3,"name":"Order of the Dragon","cnt":1,"yr":2007},{"rank":4,"name":"Order of the Dragon","cnt":1,"yr":2007},{"rank":5,"name":"Order of the Dragon","cnt":1,"yr":2007},{"rank":6,"name":"Order of the Dragon","cnt":1,"yr":2007},{"rank":7,"name":"Order of the Dragon","cnt":1,"yr":2007},{"rank":0,"name":"Order of the Flame","cnt":4,"yr":2007},{"rank":0,"name":"Order of the Garber","cnt":33,"yr":2007},{"rank":1,"name":"Order of the Garber","cnt":1,"yr":2007},{"rank":2,"name":"Order of the Garber","cnt":1,"yr":2007},{"rank":3,"name":"Order of the Garber","cnt":1,"yr":2007},{"rank":4,"name":"Order of the Garber","cnt":1,"yr":2007},{"rank":5,"name":"Order of the Garber","cnt":1,"yr":2007},{"rank":6,"name":"Order of the Garber","cnt":1,"yr":2007},{"rank":0,"name":"Order of the Griffin","cnt":20,"yr":2007},{"rank":2,"name":"Order of the Griffin","cnt":1,"yr":2007},{"rank":3,"name":"Order of the Griffin","cnt":1,"yr":2007},{"rank":4,"name":"Order of the Griffin","cnt":1,"yr":2007},{"rank":0,"name":"Order of the Hydra","cnt":10,"yr":2007},{"rank":0,"name":"Order of the Jovius","cnt":2,"yr":2007},{"rank":0,"name":"Order of the Lion","cnt":26,"yr":2007},{"rank":4,"name":"Order of the Lion","cnt":1,"yr":2007},{"rank":5,"name":"Order of the Lion","cnt":1,"yr":2007},{"rank":0,"name":"Order of the Mask","cnt":4,"yr":2007},{"rank":0,"name":"Order of the Owl","cnt":48,"yr":2007},{"rank":1,"name":"Order of the Owl","cnt":2,"yr":2007},{"rank":2,"name":"Order of the Owl","cnt":3,"yr":2007},{"rank":0,"name":"Order of the Rose","cnt":99,"yr":2007},{"rank":1,"name":"Order of the Rose","cnt":1,"yr":2007},{"rank":4,"name":"Order of the Rose","cnt":1,"yr":2007},{"rank":5,"name":"Order of the Rose","cnt":1,"yr":2007},{"rank":6,"name":"Order of the Rose","cnt":1,"yr":2007},{"rank":7,"name":"Order of the Rose","cnt":1,"yr":2007},{"rank":8,"name":"Order of the Rose","cnt":1,"yr":2007},{"rank":0,"name":"Order of the Smith","cnt":27,"yr":2007},{"rank":1,"name":"Order of the Smith","cnt":1,"yr":2007},{"rank":2,"name":"Order of the Smith","cnt":1,"yr":2007},{"rank":0,"name":"Order of the Walker in the Middle","cnt":2,"yr":2007},{"rank":0,"name":"Order of the Warrior","cnt":56,"yr":2007},{"rank":1,"name":"Order of the Warrior","cnt":1,"yr":2007},{"rank":6,"name":"Order of the Warrior","cnt":1,"yr":2007},{"rank":0,"name":"Order of the Zodiac","cnt":5,"yr":2007},{"rank":0,"name":"Warlord","cnt":1,"yr":2007},{"rank":0,"name":"Master Dragon","cnt":1,"yr":2006},{"rank":0,"name":"Master Garber","cnt":1,"yr":2006},{"rank":0,"name":"Master Rose","cnt":2,"yr":2006},{"rank":0,"name":"Order of the Dragon","cnt":70,"yr":2006},{"rank":4,"name":"Order of the Dragon","cnt":1,"yr":2006},{"rank":6,"name":"Order of the Dragon","cnt":1,"yr":2006},{"rank":7,"name":"Order of the Dragon","cnt":1,"yr":2006},{"rank":0,"name":"Order of the Flame","cnt":8,"yr":2006},{"rank":0,"name":"Order of the Garber","cnt":37,"yr":2006},{"rank":0,"name":"Order of the Griffin","cnt":28,"yr":2006},{"rank":1,"name":"Order of the Griffin","cnt":1,"yr":2006},{"rank":2,"name":"Order of the Griffin","cnt":1,"yr":2006},{"rank":3,"name":"Order of the Griffin","cnt":1,"yr":2006},{"rank":0,"name":"Order of the Hydra","cnt":9,"yr":2006},{"rank":0,"name":"Order of the Jovius","cnt":2,"yr":2006},{"rank":0,"name":"Order of the Lion","cnt":32,"yr":2006},{"rank":1,"name":"Order of the Lion","cnt":1,"yr":2006},{"rank":4,"name":"Order of the Lion","cnt":1,"yr":2006},{"rank":0,"name":"Order of the Mask","cnt":3,"yr":2006},{"rank":0,"name":"Order of the Owl","cnt":63,"yr":2006},{"rank":1,"name":"Order of the Owl","cnt":1,"yr":2006},{"rank":0,"name":"Order of the Rose","cnt":210,"yr":2006},{"rank":1,"name":"Order of the Rose","cnt":2,"yr":2006},{"rank":2,"name":"Order of the Rose","cnt":1,"yr":2006},{"rank":3,"name":"Order of the Rose","cnt":1,"yr":2006},{"rank":0,"name":"Order of the Smith","cnt":20,"yr":2006},{"rank":0,"name":"Order of the Walker in the Middle","cnt":6,"yr":2006},{"rank":0,"name":"Order of the Warrior","cnt":74,"yr":2006},{"rank":1,"name":"Order of the Warrior","cnt":2,"yr":2006},{"rank":2,"name":"Order of the Warrior","cnt":2,"yr":2006},{"rank":3,"name":"Order of the Warrior","cnt":1,"yr":2006},{"rank":4,"name":"Order of the Warrior","cnt":1,"yr":2006},{"rank":5,"name":"Order of the Warrior","cnt":1,"yr":2006},{"rank":0,"name":"Order of the Zodiac","cnt":50,"yr":2006},{"rank":0,"name":"Master Dragon","cnt":1,"yr":2005},{"rank":0,"name":"Master Lion","cnt":1,"yr":2005},{"rank":0,"name":"Master Owl","cnt":1,"yr":2005},{"rank":0,"name":"Master Rose","cnt":4,"yr":2005},{"rank":0,"name":"Order of the Dragon","cnt":75,"yr":2005},{"rank":1,"name":"Order of the Dragon","cnt":1,"yr":2005},{"rank":2,"name":"Order of the Dragon","cnt":2,"yr":2005},{"rank":3,"name":"Order of the Dragon","cnt":2,"yr":2005},{"rank":4,"name":"Order of the Dragon","cnt":1,"yr":2005},{"rank":5,"name":"Order of the Dragon","cnt":1,"yr":2005},{"rank":0,"name":"Order of the Flame","cnt":8,"yr":2005},{"rank":0,"name":"Order of the Garber","cnt":45,"yr":2005},{"rank":2,"name":"Order of the Garber","cnt":1,"yr":2005},{"rank":3,"name":"Order of the Garber","cnt":1,"yr":2005},{"rank":4,"name":"Order of the Garber","cnt":1,"yr":2005},{"rank":0,"name":"Order of the Griffin","cnt":27,"yr":2005},{"rank":3,"name":"Order of the Griffin","cnt":1,"yr":2005},{"rank":4,"name":"Order of the Griffin","cnt":1,"yr":2005},{"rank":5,"name":"Order of the Griffin","cnt":1,"yr":2005},{"rank":0,"name":"Order of the Hydra","cnt":14,"yr":2005},{"rank":0,"name":"Order of the Jovius","cnt":4,"yr":2005},{"rank":0,"name":"Order of the Lion","cnt":43,"yr":2005},{"rank":1,"name":"Order of the Lion","cnt":1,"yr":2005},{"rank":2,"name":"Order of the Lion","cnt":1,"yr":2005},{"rank":0,"name":"Order of the Mask","cnt":3,"yr":2005},{"rank":0,"name":"Order of the Owl","cnt":71,"yr":2005},{"rank":1,"name":"Order of the Owl","cnt":2,"yr":2005},{"rank":0,"name":"Order of the Rose","cnt":184,"yr":2005},{"rank":4,"name":"Order of the Rose","cnt":1,"yr":2005},{"rank":0,"name":"Order of the Smith","cnt":17,"yr":2005},{"rank":0,"name":"Order of the Warrior","cnt":135,"yr":2005},{"rank":1,"name":"Order of the Warrior","cnt":3,"yr":2005},{"rank":2,"name":"Order of the Warrior","cnt":3,"yr":2005},{"rank":3,"name":"Order of the Warrior","cnt":1,"yr":2005},{"rank":4,"name":"Order of the Warrior","cnt":1,"yr":2005},{"rank":0,"name":"Order of the Zodiac","cnt":10,"yr":2005},{"rank":0,"name":"Master Rose","cnt":7,"yr":2004},{"rank":0,"name":"Order of the Dragon","cnt":87,"yr":2004},{"rank":1,"name":"Order of the Dragon","cnt":2,"yr":2004},{"rank":0,"name":"Order of the Flame","cnt":19,"yr":2004},{"rank":0,"name":"Order of the Garber","cnt":60,"yr":2004},{"rank":0,"name":"Order of the Griffin","cnt":38,"yr":2004},{"rank":2,"name":"Order of the Griffin","cnt":1,"yr":2004},{"rank":0,"name":"Order of the Hydra","cnt":19,"yr":2004},{"rank":0,"name":"Order of the Jovius","cnt":5,"yr":2004},{"rank":0,"name":"Order of the Lion","cnt":32,"yr":2004},{"rank":0,"name":"Order of the Mask","cnt":9,"yr":2004},{"rank":0,"name":"Order of the Owl","cnt":79,"yr":2004},{"rank":1,"name":"Order of the Owl","cnt":1,"yr":2004},{"rank":4,"name":"Order of the Owl","cnt":1,"yr":2004},{"rank":0,"name":"Order of the Rose","cnt":192,"yr":2004},{"rank":3,"name":"Order of the Rose","cnt":1,"yr":2004},{"rank":8,"name":"Order of the Rose","cnt":1,"yr":2004},{"rank":0,"name":"Order of the Smith","cnt":44,"yr":2004},{"rank":1,"name":"Order of the Smith","cnt":1,"yr":2004},{"rank":0,"name":"Order of the Walker in the Middle","cnt":3,"yr":2004},{"rank":0,"name":"Order of the Warrior","cnt":144,"yr":2004},{"rank":1,"name":"Order of the Warrior","cnt":1,"yr":2004},{"rank":4,"name":"Order of the Warrior","cnt":1,"yr":2004},{"rank":0,"name":"Order of the Zodiac","cnt":22,"yr":2004},{"rank":0,"name":"Master Owl","cnt":1,"yr":2003},{"rank":0,"name":"Master Rose","cnt":2,"yr":2003},{"rank":0,"name":"Order of the Dragon","cnt":24,"yr":2003},{"rank":1,"name":"Order of the Dragon","cnt":1,"yr":2003},{"rank":0,"name":"Order of the Flame","cnt":6,"yr":2003},{"rank":0,"name":"Order of the Garber","cnt":16,"yr":2003},{"rank":1,"name":"Order of the Garber","cnt":1,"yr":2003},{"rank":0,"name":"Order of the Griffin","cnt":21,"yr":2003},{"rank":0,"name":"Order of the Hydra","cnt":3,"yr":2003},{"rank":0,"name":"Order of the Jovius","cnt":1,"yr":2003},{"rank":0,"name":"Order of the Lion","cnt":11,"yr":2003},{"rank":0,"name":"Order of the Mask","cnt":3,"yr":2003},{"rank":0,"name":"Order of the Owl","cnt":20,"yr":2003},{"rank":1,"name":"Order of the Owl","cnt":1,"yr":2003},{"rank":0,"name":"Order of the Rose","cnt":85,"yr":2003},{"rank":1,"name":"Order of the Rose","cnt":2,"yr":2003},{"rank":2,"name":"Order of the Rose","cnt":1,"yr":2003},{"rank":0,"name":"Order of the Smith","cnt":6,"yr":2003},{"rank":0,"name":"Order of the Warrior","cnt":74,"yr":2003},{"rank":1,"name":"Order of the Warrior","cnt":1,"yr":2003},{"rank":2,"name":"Order of the Warrior","cnt":1,"yr":2003},{"rank":3,"name":"Order of the Warrior","cnt":2,"yr":2003},{"rank":0,"name":"Order of the Zodiac","cnt":1,"yr":2003},{"rank":0,"name":"Warlord","cnt":1,"yr":2003},{"rank":0,"name":"Master Owl","cnt":1,"yr":2002},{"rank":0,"name":"Master Rose","cnt":1,"yr":2002},{"rank":0,"name":"Order of the Dragon","cnt":65,"yr":2002},{"rank":0,"name":"Order of the Flame","cnt":9,"yr":2002},{"rank":0,"name":"Order of the Garber","cnt":51,"yr":2002},{"rank":0,"name":"Order of the Griffin","cnt":9,"yr":2002},{"rank":0,"name":"Order of the Hydra","cnt":5,"yr":2002},{"rank":0,"name":"Order of the Jovius","cnt":3,"yr":2002},{"rank":0,"name":"Order of the Lion","cnt":8,"yr":2002},{"rank":1,"name":"Order of the Lion","cnt":1,"yr":2002},{"rank":3,"name":"Order of the Lion","cnt":1,"yr":2002},{"rank":0,"name":"Order of the Mask","cnt":4,"yr":2002},{"rank":0,"name":"Order of the Owl","cnt":87,"yr":2002},{"rank":1,"name":"Order of the Owl","cnt":1,"yr":2002},{"rank":0,"name":"Order of the Rose","cnt":129,"yr":2002},{"rank":3,"name":"Order of the Rose","cnt":2,"yr":2002},{"rank":4,"name":"Order of the Rose","cnt":1,"yr":2002},{"rank":0,"name":"Order of the Smith","cnt":5,"yr":2002},{"rank":1,"name":"Order of the Smith","cnt":2,"yr":2002},{"rank":0,"name":"Order of the Warrior","cnt":122,"yr":2002},{"rank":1,"name":"Order of the Warrior","cnt":1,"yr":2002},{"rank":8,"name":"Order of the Warrior","cnt":1,"yr":2002},{"rank":9,"name":"Order of the Warrior","cnt":1,"yr":2002},{"rank":0,"name":"Order of the Zodiac","cnt":5,"yr":2002},{"rank":0,"name":"Master Dragon","cnt":2,"yr":2001},{"rank":0,"name":"Master Lion","cnt":1,"yr":2001},{"rank":0,"name":"Master Rose","cnt":1,"yr":2001},{"rank":0,"name":"Order of the Dragon","cnt":9,"yr":2001},{"rank":6,"name":"Order of the Dragon","cnt":1,"yr":2001},{"rank":0,"name":"Order of the Flame","cnt":4,"yr":2001},{"rank":0,"name":"Order of the Garber","cnt":8,"yr":2001},{"rank":0,"name":"Order of the Griffin","cnt":13,"yr":2001},{"rank":1,"name":"Order of the Griffin","cnt":1,"yr":2001},{"rank":2,"name":"Order of the Griffin","cnt":1,"yr":2001},{"rank":4,"name":"Order of the Griffin","cnt":1,"yr":2001},{"rank":0,"name":"Order of the Hydra","cnt":5,"yr":2001},{"rank":0,"name":"Order of the Lion","cnt":8,"yr":2001},{"rank":2,"name":"Order of the Lion","cnt":1,"yr":2001},{"rank":0,"name":"Order of the Mask","cnt":3,"yr":2001},{"rank":5,"name":"Order of the Mask","cnt":1,"yr":2001},{"rank":6,"name":"Order of the Mask","cnt":1,"yr":2001},{"rank":0,"name":"Order of the Owl","cnt":9,"yr":2001},{"rank":0,"name":"Order of the Rose","cnt":45,"yr":2001},{"rank":1,"name":"Order of the Rose","cnt":1,"yr":2001},{"rank":2,"name":"Order of the Rose","cnt":1,"yr":2001},{"rank":3,"name":"Order of the Rose","cnt":1,"yr":2001},{"rank":4,"name":"Order of the Rose","cnt":1,"yr":2001},{"rank":0,"name":"Order of the Smith","cnt":6,"yr":2001},{"rank":0,"name":"Order of the Walker in the Middle","cnt":1,"yr":2001},{"rank":0,"name":"Order of the Warrior","cnt":25,"yr":2001},{"rank":1,"name":"Order of the Warrior","cnt":1,"yr":2001},{"rank":2,"name":"Order of the Warrior","cnt":1,"yr":2001},{"rank":3,"name":"Order of the Warrior","cnt":1,"yr":2001},{"rank":4,"name":"Order of the Warrior","cnt":1,"yr":2001},{"rank":7,"name":"Order of the Warrior","cnt":1,"yr":2001},{"rank":0,"name":"Order of the Zodiac","cnt":10,"yr":2001},{"rank":1,"name":"Order of the Zodiac","cnt":1,"yr":2001},{"rank":0,"name":"Master Garber","cnt":2,"yr":2000},{"rank":0,"name":"Master Rose","cnt":3,"yr":2000},{"rank":0,"name":"Order of the Dragon","cnt":11,"yr":2000},{"rank":1,"name":"Order of the Dragon","cnt":2,"yr":2000},{"rank":2,"name":"Order of the Dragon","cnt":1,"yr":2000},{"rank":3,"name":"Order of the Dragon","cnt":1,"yr":2000},{"rank":0,"name":"Order of the Flame","cnt":6,"yr":2000},{"rank":0,"name":"Order of the Garber","cnt":13,"yr":2000},{"rank":2,"name":"Order of the Garber","cnt":1,"yr":2000},{"rank":7,"name":"Order of the Garber","cnt":1,"yr":2000},{"rank":8,"name":"Order of the Garber","cnt":1,"yr":2000},{"rank":0,"name":"Order of the Griffin","cnt":14,"yr":2000},{"rank":0,"name":"Order of the Hydra","cnt":4,"yr":2000},{"rank":0,"name":"Order of the Jovius","cnt":1,"yr":2000},{"rank":1,"name":"Order of the Jovius","cnt":1,"yr":2000},{"rank":0,"name":"Order of the Lion","cnt":6,"yr":2000},{"rank":1,"name":"Order of the Lion","cnt":1,"yr":2000},{"rank":2,"name":"Order of the Lion","cnt":1,"yr":2000},{"rank":3,"name":"Order of the Lion","cnt":1,"yr":2000},{"rank":1,"name":"Order of the Mask","cnt":1,"yr":2000},{"rank":2,"name":"Order of the Mask","cnt":1,"yr":2000},{"rank":3,"name":"Order of the Mask","cnt":1,"yr":2000},{"rank":4,"name":"Order of the Mask","cnt":1,"yr":2000},{"rank":0,"name":"Order of the Owl","cnt":13,"yr":2000},{"rank":0,"name":"Order of the Rose","cnt":51,"yr":2000},{"rank":1,"name":"Order of the Rose","cnt":1,"yr":2000},{"rank":2,"name":"Order of the Rose","cnt":2,"yr":2000},{"rank":3,"name":"Order of the Rose","cnt":1,"yr":2000},{"rank":4,"name":"Order of the Rose","cnt":1,"yr":2000},{"rank":5,"name":"Order of the Rose","cnt":1,"yr":2000},{"rank":6,"name":"Order of the Rose","cnt":1,"yr":2000},{"rank":7,"name":"Order of the Rose","cnt":1,"yr":2000},{"rank":8,"name":"Order of the Rose","cnt":1,"yr":2000},{"rank":0,"name":"Order of the Smith","cnt":13,"yr":2000},{"rank":1,"name":"Order of the Smith","cnt":1,"yr":2000},{"rank":0,"name":"Order of the Walker in the Middle","cnt":1,"yr":2000},{"rank":0,"name":"Order of the Warrior","cnt":38,"yr":2000},{"rank":5,"name":"Order of the Warrior","cnt":1,"yr":2000},{"rank":6,"name":"Order of the Warrior","cnt":1,"yr":2000},{"rank":0,"name":"Order of the Zodiac","cnt":5,"yr":2000},{"rank":0,"name":"Warlord","cnt":1,"yr":2000},{"rank":0,"name":"Master Dragon","cnt":1,"yr":1999},{"rank":0,"name":"Master Garber","cnt":1,"yr":1999},{"rank":0,"name":"Master Owl","cnt":1,"yr":1999},{"rank":0,"name":"Order of the Dragon","cnt":12,"yr":1999},{"rank":1,"name":"Order of the Dragon","cnt":4,"yr":1999},{"rank":2,"name":"Order of the Dragon","cnt":3,"yr":1999},{"rank":0,"name":"Order of the Flame","cnt":1,"yr":1999},{"rank":0,"name":"Order of the Garber","cnt":10,"yr":1999},{"rank":1,"name":"Order of the Garber","cnt":2,"yr":1999},{"rank":2,"name":"Order of the Garber","cnt":2,"yr":1999},{"rank":3,"name":"Order of the Garber","cnt":1,"yr":1999},{"rank":4,"name":"Order of the Garber","cnt":1,"yr":1999},{"rank":5,"name":"Order of the Garber","cnt":1,"yr":1999},{"rank":6,"name":"Order of the Garber","cnt":1,"yr":1999},{"rank":0,"name":"Order of the Griffin","cnt":6,"yr":1999},{"rank":1,"name":"Order of the Griffin","cnt":2,"yr":1999},{"rank":0,"name":"Order of the Hydra","cnt":3,"yr":1999},{"rank":0,"name":"Order of the Jovius","cnt":2,"yr":1999},{"rank":0,"name":"Order of the Lion","cnt":7,"yr":1999},{"rank":1,"name":"Order of the Lion","cnt":2,"yr":1999},{"rank":0,"name":"Order of the Mask","cnt":1,"yr":1999},{"rank":0,"name":"Order of the Owl","cnt":10,"yr":1999},{"rank":1,"name":"Order of the Owl","cnt":2,"yr":1999},{"rank":2,"name":"Order of the Owl","cnt":2,"yr":1999},{"rank":3,"name":"Order of the Owl","cnt":1,"yr":1999},{"rank":9,"name":"Order of the Owl","cnt":1,"yr":1999},{"rank":10,"name":"Order of the Owl","cnt":1,"yr":1999},{"rank":0,"name":"Order of the Rose","cnt":39,"yr":1999},{"rank":1,"name":"Order of the Rose","cnt":5,"yr":1999},{"rank":2,"name":"Order of the Rose","cnt":3,"yr":1999},{"rank":3,"name":"Order of the Rose","cnt":2,"yr":1999},{"rank":4,"name":"Order of the Rose","cnt":2,"yr":1999},{"rank":5,"name":"Order of the Rose","cnt":2,"yr":1999},{"rank":6,"name":"Order of the Rose","cnt":1,"yr":1999},{"rank":7,"name":"Order of the Rose","cnt":1,"yr":1999},{"rank":0,"name":"Order of the Smith","cnt":4,"yr":1999},{"rank":1,"name":"Order of the Smith","cnt":1,"yr":1999},{"rank":2,"name":"Order of the Smith","cnt":1,"yr":1999},{"rank":0,"name":"Order of the Walker in the Middle","cnt":1,"yr":1999},{"rank":0,"name":"Order of the Warrior","cnt":19,"yr":1999},{"rank":1,"name":"Order of the Warrior","cnt":3,"yr":1999},{"rank":2,"name":"Order of the Warrior","cnt":1,"yr":1999},{"rank":5,"name":"Order of the Warrior","cnt":1,"yr":1999},{"rank":10,"name":"Order of the Warrior","cnt":1,"yr":1999},{"rank":0,"name":"Order of the Zodiac","cnt":1,"yr":1999},{"rank":1,"name":"Order of the Zodiac","cnt":1,"yr":1999},{"rank":10,"name":"Warlord","cnt":1,"yr":1999},{"rank":0,"name":"Master Dragon","cnt":1,"yr":1998},{"rank":0,"name":"Master Owl","cnt":1,"yr":1998},{"rank":0,"name":"Master Rose","cnt":4,"yr":1998},{"rank":0,"name":"Order of the Dragon","cnt":15,"yr":1998},{"rank":0,"name":"Order of the Garber","cnt":16,"yr":1998},{"rank":6,"name":"Order of the Garber","cnt":1,"yr":1998},{"rank":7,"name":"Order of the Garber","cnt":1,"yr":1998},{"rank":0,"name":"Order of the Griffin","cnt":5,"yr":1998},{"rank":1,"name":"Order of the Griffin","cnt":1,"yr":1998},{"rank":3,"name":"Order of the Griffin","cnt":1,"yr":1998},{"rank":0,"name":"Order of the Hydra","cnt":2,"yr":1998},{"rank":7,"name":"Order of the Hydra","cnt":1,"yr":1998},{"rank":0,"name":"Order of the Jovius","cnt":2,"yr":1998},{"rank":0,"name":"Order of the Lion","cnt":6,"yr":1998},{"rank":0,"name":"Order of the Mask","cnt":3,"yr":1998},{"rank":0,"name":"Order of the Owl","cnt":15,"yr":1998},{"rank":1,"name":"Order of the Owl","cnt":2,"yr":1998},{"rank":2,"name":"Order of the Owl","cnt":1,"yr":1998},{"rank":7,"name":"Order of the Owl","cnt":1,"yr":1998},{"rank":8,"name":"Order of the Owl","cnt":2,"yr":1998},{"rank":0,"name":"Order of the Rose","cnt":64,"yr":1998},{"rank":6,"name":"Order of the Rose","cnt":1,"yr":1998},{"rank":9,"name":"Order of the Rose","cnt":1,"yr":1998},{"rank":10,"name":"Order of the Rose","cnt":3,"yr":1998},{"rank":0,"name":"Order of the Smith","cnt":5,"yr":1998},{"rank":1,"name":"Order of the Smith","cnt":1,"yr":1998},{"rank":0,"name":"Order of the Walker in the Middle","cnt":2,"yr":1998},{"rank":0,"name":"Order of the Warrior","cnt":31,"yr":1998},{"rank":4,"name":"Order of the Warrior","cnt":1,"yr":1998},{"rank":6,"name":"Order of the Warrior","cnt":1,"yr":1998},{"rank":7,"name":"Order of the Warrior","cnt":1,"yr":1998},{"rank":8,"name":"Order of the Warrior","cnt":1,"yr":1998},{"rank":9,"name":"Order of the Warrior","cnt":1,"yr":1998},{"rank":0,"name":"Order of the Zodiac","cnt":1,"yr":1998},{"rank":0,"name":"Master Lion","cnt":1,"yr":1997},{"rank":0,"name":"Master Rose","cnt":1,"yr":1997},{"rank":0,"name":"Order of the Dragon","cnt":9,"yr":1997},{"rank":0,"name":"Order of the Garber","cnt":8,"yr":1997},{"rank":1,"name":"Order of the Garber","cnt":1,"yr":1997},{"rank":2,"name":"Order of the Garber","cnt":1,"yr":1997},{"rank":3,"name":"Order of the Garber","cnt":2,"yr":1997},{"rank":0,"name":"Order of the Griffin","cnt":3,"yr":1997},{"rank":1,"name":"Order of the Griffin","cnt":1,"yr":1997},{"rank":2,"name":"Order of the Griffin","cnt":2,"yr":1997},{"rank":0,"name":"Order of the Hydra","cnt":2,"yr":1997},{"rank":0,"name":"Order of the Jovius","cnt":1,"yr":1997},{"rank":0,"name":"Order of the Lion","cnt":5,"yr":1997},{"rank":0,"name":"Order of the Mask","cnt":1,"yr":1997},{"rank":0,"name":"Order of the Owl","cnt":12,"yr":1997},{"rank":1,"name":"Order of the Owl","cnt":1,"yr":1997},{"rank":2,"name":"Order of the Owl","cnt":2,"yr":1997},{"rank":3,"name":"Order of the Owl","cnt":1,"yr":1997},{"rank":4,"name":"Order of the Owl","cnt":1,"yr":1997},{"rank":5,"name":"Order of the Owl","cnt":1,"yr":1997},{"rank":6,"name":"Order of the Owl","cnt":2,"yr":1997},{"rank":7,"name":"Order of the Owl","cnt":1,"yr":1997},{"rank":0,"name":"Order of the Rose","cnt":24,"yr":1997},{"rank":1,"name":"Order of the Rose","cnt":2,"yr":1997},{"rank":2,"name":"Order of the Rose","cnt":1,"yr":1997},{"rank":3,"name":"Order of the Rose","cnt":2,"yr":1997},{"rank":4,"name":"Order of the Rose","cnt":1,"yr":1997},{"rank":5,"name":"Order of the Rose","cnt":1,"yr":1997},{"rank":8,"name":"Order of the Rose","cnt":1,"yr":1997},{"rank":0,"name":"Order of the Smith","cnt":3,"yr":1997},{"rank":0,"name":"Order of the Walker in the Middle","cnt":1,"yr":1997},{"rank":0,"name":"Order of the Warrior","cnt":11,"yr":1997},{"rank":1,"name":"Order of the Warrior","cnt":1,"yr":1997},{"rank":2,"name":"Order of the Warrior","cnt":1,"yr":1997},{"rank":3,"name":"Order of the Warrior","cnt":1,"yr":1997},{"rank":5,"name":"Order of the Warrior","cnt":1,"yr":1997},{"rank":6,"name":"Order of the Warrior","cnt":1,"yr":1997},{"rank":0,"name":"Order of the Zodiac","cnt":2,"yr":1997},{"rank":3,"name":"Order of the Zodiac","cnt":1,"yr":1997},{"rank":0,"name":"Master Owl","cnt":2,"yr":1996},{"rank":0,"name":"Master Rose","cnt":4,"yr":1996},{"rank":0,"name":"Order of the Dragon","cnt":14,"yr":1996},{"rank":0,"name":"Order of the Flame","cnt":2,"yr":1996},{"rank":0,"name":"Order of the Garber","cnt":5,"yr":1996},{"rank":0,"name":"Order of the Griffin","cnt":12,"yr":1996},{"rank":0,"name":"Order of the Lion","cnt":12,"yr":1996},{"rank":1,"name":"Order of the Lion","cnt":1,"yr":1996},{"rank":2,"name":"Order of the Lion","cnt":1,"yr":1996},{"rank":3,"name":"Order of the Lion","cnt":1,"yr":1996},{"rank":5,"name":"Order of the Lion","cnt":1,"yr":1996},{"rank":0,"name":"Order of the Mask","cnt":2,"yr":1996},{"rank":0,"name":"Order of the Owl","cnt":9,"yr":1996},{"rank":5,"name":"Order of the Owl","cnt":1,"yr":1996},{"rank":0,"name":"Order of the Rose","cnt":29,"yr":1996},{"rank":7,"name":"Order of the Rose","cnt":1,"yr":1996},{"rank":0,"name":"Order of the Smith","cnt":4,"yr":1996},{"rank":2,"name":"Order of the Smith","cnt":1,"yr":1996},{"rank":0,"name":"Order of the Walker in the Middle","cnt":2,"yr":1996},{"rank":0,"name":"Order of the Warrior","cnt":28,"yr":1996},{"rank":1,"name":"Order of the Warrior","cnt":1,"yr":1996},{"rank":2,"name":"Order of the Warrior","cnt":2,"yr":1996},{"rank":3,"name":"Order of the Warrior","cnt":2,"yr":1996},{"rank":4,"name":"Order of the Warrior","cnt":2,"yr":1996},{"rank":5,"name":"Order of the Warrior","cnt":1,"yr":1996},{"rank":6,"name":"Order of the Warrior","cnt":2,"yr":1996},{"rank":0,"name":"Order of the Zodiac","cnt":3,"yr":1996},{"rank":2,"name":"Order of the Zodiac","cnt":1,"yr":1996},{"rank":0,"name":"Master Dragon","cnt":2,"yr":1995},{"rank":0,"name":"Master Rose","cnt":1,"yr":1995},{"rank":0,"name":"Order of the Dragon","cnt":6,"yr":1995},{"rank":0,"name":"Order of the Garber","cnt":9,"yr":1995},{"rank":1,"name":"Order of the Garber","cnt":1,"yr":1995},{"rank":3,"name":"Order of the Garber","cnt":1,"yr":1995},{"rank":5,"name":"Order of the Garber","cnt":1,"yr":1995},{"rank":0,"name":"Order of the Griffin","cnt":3,"yr":1995},{"rank":4,"name":"Order of the Griffin","cnt":1,"yr":1995},{"rank":0,"name":"Order of the Hydra","cnt":1,"yr":1995},{"rank":6,"name":"Order of the Hydra","cnt":1,"yr":1995},{"rank":0,"name":"Order of the Lion","cnt":5,"yr":1995},{"rank":4,"name":"Order of the Lion","cnt":1,"yr":1995},{"rank":0,"name":"Order of the Mask","cnt":1,"yr":1995},{"rank":0,"name":"Order of the Owl","cnt":7,"yr":1995},{"rank":0,"name":"Order of the Rose","cnt":26,"yr":1995},{"rank":1,"name":"Order of the Rose","cnt":1,"yr":1995},{"rank":2,"name":"Order of the Rose","cnt":2,"yr":1995},{"rank":4,"name":"Order of the Rose","cnt":1,"yr":1995},{"rank":5,"name":"Order of the Rose","cnt":2,"yr":1995},{"rank":6,"name":"Order of the Rose","cnt":1,"yr":1995},{"rank":8,"name":"Order of the Rose","cnt":1,"yr":1995},{"rank":9,"name":"Order of the Rose","cnt":2,"yr":1995},{"rank":10,"name":"Order of the Rose","cnt":1,"yr":1995},{"rank":0,"name":"Order of the Smith","cnt":4,"yr":1995},{"rank":1,"name":"Order of the Smith","cnt":1,"yr":1995},{"rank":0,"name":"Order of the Warrior","cnt":17,"yr":1995},{"rank":1,"name":"Order of the Warrior","cnt":1,"yr":1995},{"rank":2,"name":"Order of the Warrior","cnt":1,"yr":1995},{"rank":3,"name":"Order of the Warrior","cnt":1,"yr":1995},{"rank":0,"name":"Order of the Zodiac","cnt":3,"yr":1995},{"rank":0,"name":"Warlord","cnt":1,"yr":1995},{"rank":0,"name":"Master Dragon","cnt":1,"yr":1994},{"rank":0,"name":"Order of the Dragon","cnt":8,"yr":1994},{"rank":1,"name":"Order of the Dragon","cnt":1,"yr":1994},{"rank":10,"name":"Order of the Dragon","cnt":1,"yr":1994},{"rank":0,"name":"Order of the Garber","cnt":2,"yr":1994},{"rank":1,"name":"Order of the Garber","cnt":1,"yr":1994},{"rank":2,"name":"Order of the Garber","cnt":2,"yr":1994},{"rank":3,"name":"Order of the Garber","cnt":1,"yr":1994},{"rank":4,"name":"Order of the Garber","cnt":1,"yr":1994},{"rank":4,"name":"Order of the Griffin","cnt":1,"yr":1994},{"rank":5,"name":"Order of the Hydra","cnt":1,"yr":1994},{"rank":3,"name":"Order of the Lion","cnt":1,"yr":1994},{"rank":0,"name":"Order of the Owl","cnt":5,"yr":1994},{"rank":0,"name":"Order of the Rose","cnt":20,"yr":1994},{"rank":3,"name":"Order of the Rose","cnt":1,"yr":1994},{"rank":4,"name":"Order of the Rose","cnt":1,"yr":1994},{"rank":8,"name":"Order of the Rose","cnt":1,"yr":1994},{"rank":0,"name":"Order of the Smith","cnt":3,"yr":1994},{"rank":0,"name":"Order of the Warrior","cnt":18,"yr":1994},{"rank":0,"name":"Order of the Zodiac","cnt":2,"yr":1994},{"rank":0,"name":"Order of the Dragon","cnt":9,"yr":1993},{"rank":9,"name":"Order of the Dragon","cnt":2,"yr":1993},{"rank":10,"name":"Order of the Dragon","cnt":1,"yr":1993},{"rank":0,"name":"Order of the Garber","cnt":5,"yr":1993},{"rank":1,"name":"Order of the Garber","cnt":1,"yr":1993},{"rank":2,"name":"Order of the Griffin","cnt":1,"yr":1993},{"rank":4,"name":"Order of the Hydra","cnt":1,"yr":1993},{"rank":5,"name":"Order of the Hydra","cnt":1,"yr":1993},{"rank":0,"name":"Order of the Lion","cnt":1,"yr":1993},{"rank":2,"name":"Order of the Lion","cnt":2,"yr":1993},{"rank":3,"name":"Order of the Lion","cnt":1,"yr":1993},{"rank":0,"name":"Order of the Owl","cnt":4,"yr":1993},{"rank":1,"name":"Order of the Owl","cnt":1,"yr":1993},{"rank":3,"name":"Order of the Owl","cnt":1,"yr":1993},{"rank":5,"name":"Order of the Owl","cnt":1,"yr":1993},{"rank":6,"name":"Order of the Owl","cnt":1,"yr":1993},{"rank":0,"name":"Order of the Rose","cnt":17,"yr":1993},{"rank":1,"name":"Order of the Rose","cnt":1,"yr":1993},{"rank":2,"name":"Order of the Rose","cnt":1,"yr":1993},{"rank":7,"name":"Order of the Rose","cnt":2,"yr":1993},{"rank":0,"name":"Order of the Smith","cnt":2,"yr":1993},{"rank":0,"name":"Order of the Warrior","cnt":2,"yr":1993},{"rank":2,"name":"Order of the Warrior","cnt":1,"yr":1993},{"rank":3,"name":"Order of the Warrior","cnt":1,"yr":1993},{"rank":1,"name":"Order of the Zodiac","cnt":1,"yr":1993},{"rank":0,"name":"Master Rose","cnt":1,"yr":1992},{"rank":0,"name":"Order of the Dragon","cnt":4,"yr":1992},{"rank":7,"name":"Order of the Dragon","cnt":1,"yr":1992},{"rank":8,"name":"Order of the Dragon","cnt":1,"yr":1992},{"rank":0,"name":"Order of the Garber","cnt":3,"yr":1992},{"rank":1,"name":"Order of the Griffin","cnt":2,"yr":1992},{"rank":3,"name":"Order of the Hydra","cnt":1,"yr":1992},{"rank":4,"name":"Order of the Hydra","cnt":1,"yr":1992},{"rank":0,"name":"Order of the Jovius","cnt":1,"yr":1992},{"rank":0,"name":"Order of the Lion","cnt":2,"yr":1992},{"rank":1,"name":"Order of the Lion","cnt":2,"yr":1992},{"rank":2,"name":"Order of the Lion","cnt":1,"yr":1992},{"rank":0,"name":"Order of the Owl","cnt":5,"yr":1992},{"rank":1,"name":"Order of the Owl","cnt":1,"yr":1992},{"rank":3,"name":"Order of the Owl","cnt":1,"yr":1992},{"rank":4,"name":"Order of the Owl","cnt":2,"yr":1992},{"rank":0,"name":"Order of the Rose","cnt":4,"yr":1992},{"rank":5,"name":"Order of the Rose","cnt":1,"yr":1992},{"rank":6,"name":"Order of the Rose","cnt":3,"yr":1992},{"rank":0,"name":"Order of the Warrior","cnt":17,"yr":1992},{"rank":1,"name":"Order of the Warrior","cnt":1,"yr":1992},{"rank":2,"name":"Order of the Warrior","cnt":1,"yr":1992},{"rank":9,"name":"Order of the Warrior","cnt":1,"yr":1992},{"rank":10,"name":"Order of the Warrior","cnt":1,"yr":1992},{"rank":1,"name":"Order of the Zodiac","cnt":1,"yr":1992},{"rank":0,"name":"Warlord","cnt":1,"yr":1992},{"rank":0,"name":"Order of the Dragon","cnt":3,"yr":1991},{"rank":1,"name":"Order of the Dragon","cnt":1,"yr":1991},{"rank":2,"name":"Order of the Dragon","cnt":1,"yr":1991},{"rank":3,"name":"Order of the Dragon","cnt":1,"yr":1991},{"rank":4,"name":"Order of the Dragon","cnt":2,"yr":1991},{"rank":5,"name":"Order of the Dragon","cnt":2,"yr":1991},{"rank":6,"name":"Order of the Dragon","cnt":2,"yr":1991},{"rank":7,"name":"Order of the Dragon","cnt":1,"yr":1991},{"rank":8,"name":"Order of the Dragon","cnt":1,"yr":1991},{"rank":1,"name":"Order of the Garber","cnt":1,"yr":1991},{"rank":2,"name":"Order of the Garber","cnt":1,"yr":1991},{"rank":3,"name":"Order of the Garber","cnt":1,"yr":1991},{"rank":4,"name":"Order of the Garber","cnt":1,"yr":1991},{"rank":0,"name":"Order of the Griffin","cnt":2,"yr":1991},{"rank":0,"name":"Order of the Hydra","cnt":2,"yr":1991},{"rank":3,"name":"Order of the Hydra","cnt":1,"yr":1991},{"rank":0,"name":"Order of the Lion","cnt":2,"yr":1991},{"rank":1,"name":"Order of the Lion","cnt":1,"yr":1991},{"rank":0,"name":"Order of the Owl","cnt":1,"yr":1991},{"rank":1,"name":"Order of the Owl","cnt":1,"yr":1991},{"rank":2,"name":"Order of the Owl","cnt":2,"yr":1991},{"rank":3,"name":"Order of the Owl","cnt":1,"yr":1991},{"rank":0,"name":"Order of the Rose","cnt":1,"yr":1991},{"rank":1,"name":"Order of the Rose","cnt":1,"yr":1991},{"rank":2,"name":"Order of the Rose","cnt":2,"yr":1991},{"rank":3,"name":"Order of the Rose","cnt":3,"yr":1991},{"rank":4,"name":"Order of the Rose","cnt":2,"yr":1991},{"rank":5,"name":"Order of the Rose","cnt":1,"yr":1991},{"rank":0,"name":"Order of the Warrior","cnt":3,"yr":1991},{"rank":1,"name":"Order of the Warrior","cnt":3,"yr":1991},{"rank":2,"name":"Order of the Warrior","cnt":1,"yr":1991},{"rank":3,"name":"Order of the Warrior","cnt":1,"yr":1991},{"rank":4,"name":"Order of the Warrior","cnt":1,"yr":1991},{"rank":0,"name":"Order of the Dragon","cnt":3,"yr":1990},{"rank":1,"name":"Order of the Dragon","cnt":1,"yr":1990},{"rank":2,"name":"Order of the Dragon","cnt":2,"yr":1990},{"rank":3,"name":"Order of the Dragon","cnt":1,"yr":1990},{"rank":1,"name":"Order of the Hydra","cnt":2,"yr":1990},{"rank":2,"name":"Order of the Hydra","cnt":1,"yr":1990},{"rank":0,"name":"Order of the Owl","cnt":2,"yr":1990},{"rank":1,"name":"Order of the Owl","cnt":1,"yr":1990},{"rank":0,"name":"Order of the Rose","cnt":1,"yr":1990},{"rank":1,"name":"Order of the Rose","cnt":2,"yr":1990},{"rank":2,"name":"Order of the Rose","cnt":1,"yr":1990},{"rank":0,"name":"Order of the Warrior","cnt":4,"yr":1990},{"rank":1,"name":"Order of the Dragon","cnt":1,"yr":1989},{"rank":0,"name":"Order of the Warrior","cnt":2,"yr":1989},{"rank":0,"name":"Master Rose","cnt":1,"yr":1988},{"rank":4,"name":"Order of the Dragon","cnt":1,"yr":1988},{"rank":5,"name":"Order of the Dragon","cnt":1,"yr":1988},{"rank":9,"name":"Order of the Dragon","cnt":1,"yr":1988},{"rank":0,"name":"Order of the Griffin","cnt":1,"yr":1988},{"rank":0,"name":"Order of the Hydra","cnt":3,"yr":1988},{"rank":1,"name":"Order of the Lion","cnt":1,"yr":1988},{"rank":2,"name":"Order of the Owl","cnt":1,"yr":1988},{"rank":0,"name":"Order of the Rose","cnt":1,"yr":1988},{"rank":5,"name":"Order of the Rose","cnt":1,"yr":1988},{"rank":0,"name":"Order of the Warrior","cnt":1,"yr":1988},{"rank":1,"name":"Order of the Warrior","cnt":1,"yr":1988},{"rank":0,"name":"Order of the Flame","cnt":1,"yr":1987},{"rank":1,"name":"Order of the Rose","cnt":1,"yr":1987},{"rank":2,"name":"Order of the Rose","cnt":1,"yr":1987},{"rank":3,"name":"Order of the Rose","cnt":1,"yr":1987},{"rank":0,"name":"Order of the Mask","cnt":1,"yr":1985},{"rank":0,"name":"Order of the Dragon","cnt":2,"yr":1980},{"rank":0,"name":"Order of the Garber","cnt":1,"yr":1980},{"rank":0,"name":"Order of the Lion","cnt":1,"yr":1980},{"rank":0,"name":"Order of the Mask","cnt":6,"yr":1980},{"rank":0,"name":"Order of the Owl","cnt":1,"yr":1980},{"rank":0,"name":"Order of the Rose","cnt":19,"yr":1980},{"rank":0,"name":"Order of the Warrior","cnt":12,"yr":1980}]');
+
+            yr2019 = data.filter(obj => obj.yr == 2018);
+
+            let stats = [];
+            data.map(function (curr, i) {
+                var slug = curr.name.replace(/\s+/g, '-'); 
+                if (stats[slug] == undefined) {
+                    stats[slug] = [];
+                }
+                if (stats[slug][curr.yr] == undefined) {
+                    stats[slug][curr.yr] = [];
+                }
+                stats[slug][curr.yr][curr.rank] = curr.cnt;
+            });
+
+            for (var property in stats) {
+                if (stats.hasOwnProperty(property)) {
+                    var slug = property; 
+                    let isMasterhood = slug.includes('Master') || slug.includes('Walker');
+
+                    var chorule = document.createElement('hr');
+                    var titleh2 = document.createElement('h2');
+                    var t = document.createTextNode(slug.replace(/-/g, ' '))
+                    titleh2.appendChild(t);
+                    var g = document.createElement('canvas');
+                    g.setAttribute("id", slug);
+                    let chartdata = [];
+
+                    document.getElementById("stat-container").appendChild(chorule).appendChild(titleh2).appendChild(g);
+
+                    stats[property].map(function (sub, iii) {
+                        let dataset = {
+                            label: iii,
+                            data: [],
+                            backgroundColor: cbgcolors[iii],
+                            borderColor: cbccolors[iii],
+                            borderWidth: 1
+                        };
+
+                        if (isMasterhood) {
+                            var mcnt = sub.reduce(function (a, b) {
+                                return a + b;
+                            }, 0);
+
+                            dataset.data.push(mcnt);
+                        } else {
+                            for (vi=0; vi<=10; vi++) {
+                                if (sub[vi] == undefined) {
+                                    dataset.data.push(0);
+                                } else {
+                                    dataset.data.push(sub[vi]);
+                                }
+                            }
+                        }
+                        chartdata.push(dataset);
+                    });
+
+                    new Chart(document.getElementById(slug), {
+                        type: (isMasterhood) ? 'bar' : 'bar',
+                        data: {
+                            labels: (isMasterhood) ? clabelmasters : clabelsExtra,
+                            datasets: chartdata
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                }
+            }
+        </script>
         <h1 style="text-align: center;">CK - Knights Belts</h1>
 		<div style="width: 75%; margin: 0 auto;">
 			<canvas id="knights"></canvas>
         </div>
 
         <hr />
-        <h1 style="text-align: center;">CK - Knights Activity by Signins 2019</h1>
+        <h1 style="text-align: center;">CK - Knights Activity by Signins</h1>
 		<div style="width: 75%; margin: 0 auto;">
 			<canvas id="knights_att"></canvas>
         </div>
 
-        <hr />
-        <h1 style="text-align: center;">CK - Orders of the Warrior</h1>
-		<div style="width: 75%; margin: 0 auto;">
-			<canvas id="war"></canvas>
-        </div>
-        
-        <hr />
-        <h1 style="text-align: center;">CK - Orders of the Dragon</h1>
-		<div style="width: 75%; margin: 0 auto;">
-			<canvas id="dragon"></canvas>
-        </div>
-        
-        <hr />
-        <h1 style="text-align: center;">CK - Orders of the Garber</h1>
-		<div style="width: 75%; margin: 0 auto;">
-			<canvas id="garber"></canvas>
-        </div>
-        
-        <hr />
-        <h1 style="text-align: center;">CK - Orders of the Owl</h1>
-		<div style="width: 75%; margin: 0 auto;">
-			<canvas id="owl"></canvas>
-        </div>
-        
-        <hr />
-        <h1 style="text-align: center;">CK - Orders of the Rose</h1>
-		<div style="width: 75%; margin: 0 auto;">
-			<canvas id="rose"></canvas>
-        </div>
-        
-        <hr />
-        <h1 style="text-align: center;">CK - Orders of the Smith</h1>
-		<div style="width: 75%; margin: 0 auto;">
-			<canvas id="smith"></canvas>
-        </div>
-
-        <hr />
-        <h1 style="text-align: center;">CK - Orders of the Lion</h1>
-		<div style="width: 75%; margin: 0 auto;">
-			<canvas id="lion"></canvas>
-		</div>
-        <hr />
-        <h1 style="text-align: center;">CK - Orders of the Crown</h1>
-		<div style="width: 75%; margin: 0 auto;">
-			<canvas id="crown"></canvas>
-		</div>
 		<script>
             var clabels = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Nineth', 'Tenth', 'Masterhood'];
             var cbgcolors = [
@@ -111,644 +236,6 @@
                     }]
                 }
             });
-
-
-			new Chart(document.getElementById('war'), {
-                type: 'bar',
-                data: {
-                    labels: clabels,
-                    datasets: [{
-                        label: '2019',
-                        data: [50, 35, 27, 16, 9, 6, 2, 1, 1, 2, 2],
-                        backgroundColor: cbgcolors[0],
-                        borderColor: cbccolors[0],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2018',
-                        data: [37, 27, 17, 14, 10, 2, 4, 2, 1, 0, 0],
-                        backgroundColor: cbgcolors[1],
-                        borderColor: cbccolors[1],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2017',
-                        data: [47, 23, 6, 4, 4, 4, 0, 0, 0, 0, 1],
-                        backgroundColor: cbgcolors[2],
-                        borderColor: cbccolors[2],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2016',
-                        data: [33, 13, 9, 5, 5, 2, 1, 1, 1, 0, 0],
-                        backgroundColor: cbgcolors[3],
-                        borderColor: cbccolors[3],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2015',
-                        data: [38, 21, 17, 7, 3, 1, 0, 0, 0, 0, 0],
-                        backgroundColor: cbgcolors[4],
-                        borderColor: cbccolors[4],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2014',
-                        data: [37, 13, 10, 6, 2, 1, 2, 2, 1, 2, 1],
-                        backgroundColor: cbgcolors[5],
-                        borderColor: cbccolors[5],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2013',
-                        data: [40, 8, 7, 6, 0, 2, 1, 0, 0, 0, 0],
-                        backgroundColor: cbgcolors[6],
-                        borderColor: cbccolors[6],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2012',
-                        data: [66, 6, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                        backgroundColor: cbgcolors[7],
-                        borderColor: cbccolors[7],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2011',
-                        data: [38, 1, 0, 1, 2, 0, 0, 0, 0, 0, 0],
-                        backgroundColor: cbgcolors[8],
-                        borderColor: cbccolors[8],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2010',
-                        data: [48, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
-                        backgroundColor: cbgcolors[9],
-                        borderColor: cbccolors[9],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-        });
-
-
-			new Chart(document.getElementById('dragon'), {
-                type: 'bar',
-                data: {
-                    labels: clabels,
-                    datasets: [{
-                        label: '2019',
-                        data: [30, 20, 15, 12, 6, 3, 5, 4, 3, 1, 0],
-                        backgroundColor: cbgcolors[0],
-                        borderColor: cbccolors[0],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2018',
-                        data: [35, 24, 18, 10, 7, 6, 3, 1, 0, 2, 2],
-                        backgroundColor: cbgcolors[1],
-                        borderColor: cbccolors[1],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2017',
-                        data: [34, 22, 13, 13, 10, 7, 2, 3, 4, 0, 0],
-                        backgroundColor: cbgcolors[2],
-                        borderColor: cbccolors[2],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2016',
-                        data: [21, 14, 9, 8, 4, 4, 3, 1, 0, 0, 0],
-                        backgroundColor: cbgcolors[3],
-                        borderColor: cbccolors[3],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2015',
-                        data: [33, 20, 9, 9, 2, 1, 1, 0, 0, 0, 0],
-                        backgroundColor: cbgcolors[4],
-                        borderColor: cbccolors[4],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2014',
-                        data: [26, 10, 9, 6, 4, 6, 0, 1, 1, 0, 0],
-                        backgroundColor: cbgcolors[5],
-                        borderColor: cbccolors[5],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2013',
-                        data: [46, 3, 4, 1, 2, 0, 2, 0, 0, 0, 0],
-                        backgroundColor: cbgcolors[6],
-                        borderColor: cbccolors[6],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2012',
-                        data: [41, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        backgroundColor: cbgcolors[7],
-                        borderColor: cbccolors[7],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2011',
-                        data: [62, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0],
-                        backgroundColor: cbgcolors[8],
-                        borderColor: cbccolors[8],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2010',
-                        data: [57, 2, 2, 1, 1, 1, 0, 0, 0, 0, 1],
-                        backgroundColor: cbgcolors[9],
-                        borderColor: cbccolors[9],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-        });
-
-
-
-
-			new Chart(document.getElementById('garber'), {
-                type: 'bar',
-                data: {
-                    labels: clabels,
-                    datasets: [{
-                        label: '2019',
-                        data: [11, 9, 7, 4, 3, 2, 0, 0, 2, 0, 1],
-                        backgroundColor: cbgcolors[0],
-                        borderColor: cbccolors[0],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2018',
-                        data: [13, 8, 7, 5, 5, 1, 3, 2, 0, 1, 1],
-                        backgroundColor: cbgcolors[1],
-                        borderColor: cbccolors[1],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2017',
-                        data: [20, 8, 10, 8, 0, 0, 0, 0, 1, 0, 0],
-                        backgroundColor: cbgcolors[2],
-                        borderColor: cbccolors[2],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2016',
-                        data: [20, 13, 8, 3, 1, 1, 1, 1, 1, 0, 0],
-                        backgroundColor: cbgcolors[3],
-                        borderColor: cbccolors[3],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2015',
-                        data: [18, 8, 3, 2, 3, 0, 0, 1, 0, 0, 0],
-                        backgroundColor: cbgcolors[4],
-                        borderColor: cbccolors[4],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2014',
-                        data: [14, 7, 6, 4, 3, 1, 1, 0, 0, 0, 0],
-                        backgroundColor: cbgcolors[5],
-                        borderColor: cbccolors[5],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2013',
-                        data: [26, 6, 2, 0, 1, 0, 0, 0, 0, 0, 0],
-                        backgroundColor: cbgcolors[6],
-                        borderColor: cbccolors[6],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2012',
-                        data: [24, 2, 2, 3, 0, 0, 0, 0, 0, 0, 0],
-                        backgroundColor: cbgcolors[7],
-                        borderColor: cbccolors[7],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2011',
-                        data: [29, 1, 2, 1, 2, 0, 0, 0, 0, 0, 0],
-                        backgroundColor: cbgcolors[8],
-                        borderColor: cbccolors[8],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2010',
-                        data: [34, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        backgroundColor: cbgcolors[9],
-                        borderColor: cbccolors[9],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-        });
-
-
-			new Chart(document.getElementById('owl'), {
-                type: 'bar',
-                data: {
-                    labels: clabels,
-                    datasets: [{
-                        label: '2019',
-                        data: [16, 19, 12, 11, 10, 4, 0, 0, 1, 0, 1],
-                        backgroundColor: cbgcolors[0],
-                        borderColor: cbccolors[0],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2018',
-                        data: [19, 11, 8, 6, 3, 1, 3, 0, 1, 1, 0],
-                        backgroundColor: cbgcolors[1],
-                        borderColor: cbccolors[1],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2017',
-                        data: [25, 20, 16, 9, 4, 8, 1, 1, 0, 0, 0],
-                        backgroundColor: cbgcolors[2],
-                        borderColor: cbccolors[2],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2016',
-                        data: [29, 18, 6, 5, 1, 0, 0, 0, 0, 1, 1],
-                        backgroundColor: cbgcolors[3],
-                        borderColor: cbccolors[3],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2015',
-                        data: [26, 18, 9, 3, 3, 0, 0, 0, 0, 0, 0],
-                        backgroundColor: cbgcolors[4],
-                        borderColor: cbccolors[4],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2014',
-                        data: [34, 11, 5, 5, 2, 0, 0, 1, 2, 0, 0],
-                        backgroundColor: cbgcolors[5],
-                        borderColor: cbccolors[5],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2013',
-                        data: [40, 4, 4, 1, 0, 0, 1, 0, 0, 0, 0],
-                        backgroundColor: cbgcolors[6],
-                        borderColor: cbccolors[6],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2012',
-                        data: [47, 3, 1, 1, 0, 0, 0, 0, 0, 0, 0],
-                        backgroundColor: cbgcolors[7],
-                        borderColor: cbccolors[7],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2011',
-                        data: [55, 2, 0, 0, 0, 0, 2, 1, 0 , 0, 0],
-                        backgroundColor: cbgcolors[8],
-                        borderColor: cbccolors[8],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2010',
-                        data: [37, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
-                        backgroundColor: cbgcolors[9],
-                        borderColor: cbccolors[9],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-        });
-
-
-
-			new Chart(document.getElementById('rose'), {
-                type: 'bar',
-                data: {
-                    labels: clabels,
-                    datasets: [{
-                        label: '2019',
-                        data: [45, 35, 23, 22, 12, 8, 6, 3, 3, 2, 2],
-                        backgroundColor: cbgcolors[0],
-                        borderColor: cbccolors[0],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2018',
-                        data: [43, 24, 19, 11, 15, 9, 2, 1, 1, 4, 3],
-                        backgroundColor: cbgcolors[1],
-                        borderColor: cbccolors[1],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2017',
-                        data: [39, 24, 19, 15, 9, 11, 5, 5, 3, 1, 1],
-                        backgroundColor: cbgcolors[2],
-                        borderColor: cbccolors[2],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2016',
-                        data: [28, 19, 14, 9, 8, 7, 5, 2, 2, 1, 2],
-                        backgroundColor: cbgcolors[3],
-                        borderColor: cbccolors[3],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2015',
-                        data: [38, 32, 18, 16, 13, 4, 4, 2, 1, 2, 2],
-                        backgroundColor: cbgcolors[4],
-                        borderColor: cbccolors[4],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2014',
-                        data: [49, 21, 11, 10, 9, 7, 0, 2, 4, 3, 3],
-                        backgroundColor: cbgcolors[5],
-                        borderColor: cbccolors[5],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2013',
-                        data: [58, 10, 7, 9, 2, 3, 4, 1, 4, 1, 3],
-                        backgroundColor: cbgcolors[6],
-                        borderColor: cbccolors[6],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2012',
-                        data: [88, 3, 3, 1, 0, 1, 0, 0, 0, 0, 0],
-                        backgroundColor: cbgcolors[7],
-                        borderColor: cbccolors[7],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2011',
-                        data: [98, 4, 3, 0, 0, 0, 0, 1, 1, 1, 3],
-                        backgroundColor: cbgcolors[8],
-                        borderColor: cbccolors[8],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2010',
-                        data: [96, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0],
-                        backgroundColor: cbgcolors[9],
-                        borderColor: cbccolors[9],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-        });
-
-
-			new Chart(document.getElementById('smith'), {
-                type: 'bar',
-                data: {
-                    labels: clabels,
-                    datasets: [{
-                        label: '2019',
-                        data: [12, 12, 13, 5, 1, 2, 0, 0, 0, 0, 1],
-                        backgroundColor: cbgcolors[0],
-                        borderColor: cbccolors[0],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2018',
-                        data: [15, 7, 5, 0, 1, 0, 0, 0, 1, 1, 1],
-                        backgroundColor: cbgcolors[1],
-                        borderColor: cbccolors[1],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2017',
-                        data: [12, 7, 1, 1, 3, 1, 0, 1, 0, 0, 1],
-                        backgroundColor: cbgcolors[2],
-                        borderColor: cbccolors[2],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2016',
-                        data: [14, 7, 1, 1, 0, 0, 0, 0, 1, 1, 1],
-                        backgroundColor: cbgcolors[3],
-                        borderColor: cbccolors[3],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2015',
-                        data: [10, 6, 2, 1, 2, 1, 1, 1, 2, 0, 0],
-                        backgroundColor: cbgcolors[4],
-                        borderColor: cbccolors[4],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2014',
-                        data: [14, 9, 6, 5, 1, 1, 0, 0, 0, 0, 0],
-                        backgroundColor: cbgcolors[5],
-                        borderColor: cbccolors[5],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2013',
-                        data: [18, 5, 3, 0, 0, 1, 2, 1, 0, 0, 0],
-                        backgroundColor: cbgcolors[6],
-                        borderColor: cbccolors[6],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2012',
-                        data: [18, 3, 0, 1, 1, 1, 0, 0, 0, 0, 0],
-                        backgroundColor: cbgcolors[7],
-                        borderColor: cbccolors[7],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2011',
-                        data: [17, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                        backgroundColor: cbgcolors[8],
-                        borderColor: cbccolors[8],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2010',
-                        data: [19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        backgroundColor: cbgcolors[9],
-                        borderColor: cbccolors[9],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-        });
-
-
-			new Chart(document.getElementById('lion'), {
-                type: 'bar',
-                data: {
-                    labels: clabels,
-                    datasets: [{
-                        label: '2019',
-                        data: [11, 14, 5, 2, 1, 3, 1, 1, 1, 0, 0],
-                        backgroundColor: cbgcolors[0],
-                        borderColor: cbccolors[0],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2018',
-                        data: [15, 9, 9, 3, 2, 1, 0, 0, 1, 1, 1],
-                        backgroundColor: cbgcolors[1],
-                        borderColor: cbccolors[1],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2017',
-                        data: [9, 4, 8, 2, 1, 0, 0, 1, 0, 0, 0],
-                        backgroundColor: cbgcolors[2],
-                        borderColor: cbccolors[2],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2016',
-                        data: [21, 6, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                        backgroundColor: cbgcolors[3],
-                        borderColor: cbccolors[3],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2015',
-                        data: [2, 3, 3, 3, 2, 1, 0, 0, 0, 0, 0],
-                        backgroundColor: cbgcolors[4],
-                        borderColor: cbccolors[4],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2014',
-                        data: [13, 6, 2, 0, 0, 0, 2, 1, 0, 0, 0],
-                        backgroundColor: cbgcolors[5],
-                        borderColor: cbccolors[5],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2013',
-                        data: [55, 8, 3, 1, 1, 1, 1, 0, 0, 0, 0],
-                        backgroundColor: cbgcolors[6],
-                        borderColor: cbccolors[6],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2012',
-                        data: [19, 4, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                        backgroundColor: cbgcolors[7],
-                        borderColor: cbccolors[7],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2011',
-                        data: [29, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        backgroundColor: cbgcolors[8],
-                        borderColor: cbccolors[8],
-                        borderWidth: 1
-                    },
-                    {
-                        label: '2010',
-                        data: [22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        backgroundColor: cbgcolors[9],
-                        borderColor: cbccolors[9],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-        });
-
-
-			new Chart(document.getElementById('crown'), {
-                type: 'bar',
-                data: {
-                    labels: clabels,
-                    datasets: [{
-                        label: '2019',
-                        data: [27, 19, 8, 8, 7, 5, 1, 6, 3, 4, 8],
-                        backgroundColor: cbgcolors[0],
-                        borderColor: cbccolors[0],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-        });
-
 		</script>
-
 	</body>
 </html>
