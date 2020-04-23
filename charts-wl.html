@@ -174,68 +174,6 @@
                 }
             }
         </script>
-        <h1 style="text-align: center;">CK - Knights Belts</h1>
-		<div style="width: 75%; margin: 0 auto;">
-			<canvas id="knights"></canvas>
-        </div>
 
-        <hr />
-        <h1 style="text-align: center;">CK - Knights Activity by Signins</h1>
-		<div style="width: 75%; margin: 0 auto;">
-			<canvas id="knights_att"></canvas>
-        </div>
-
-		<script>
-            var clabels = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Nineth', 'Tenth', 'Masterhood'];
-            var cbgcolors = [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(35, 102, 180, 0.2)',
-                            'rgba(22, 102, 66, 0.2)',
-                            'rgba(44, 20, 255, 0.2)',
-                            'rgba(153, 102, 85, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
-            ];
-
-            var cbccolors = [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(35, 102, 180, 1)',
-                            'rgba(22, 102, 66, 1)',
-                            'rgba(44, 20, 255, 1)',
-                            'rgba(153, 102, 85, 1)',
-                            'rgba(255, 159, 64, 1)'
-            ];
-
-            new Chart(document.getElementById("knights_att"), {
-                "type": "polarArea",
-                "data": {
-                    "labels": ["12 or More Signins", "1 - 11 Signins", "Zero Signins"],
-                    "datasets": [{
-                        "label": "CK Knights",
-                        "data": [18, 23, 62],
-                        "backgroundColor": ["rgba(75, 192, 192)", "rgba(255, 206, 86, 0.5)", "rgba(255, 99, 132, 0.2)"]
-                    }]
-                }
-            });
-
-            new Chart(document.getElementById("knights"), {
-                "type": "doughnut",
-                "data": {
-                    "labels": ["Flame", "Sword", "Crown", "Serpent"],
-                    "datasets": [{
-                        "label": "CK Knights",
-                        "data": [72, 18, 30, 28],
-                        "backgroundColor": ["rgb(255, 99, 132)", "rgb(54, 162, 235)", "rgb(255, 205, 86)", "rgb(34,139,34)"]
-                    }]
-                }
-            });
-		</script>
 	</body>
 </html>
