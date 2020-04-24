@@ -1,0 +1,368 @@
+<html>
+	<head>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>	
+ 
+	</head>
+	<body>
+        <div id="stat-container">
+            
+        </div>
+
+        <h1 style="text-align: center;">CK - 2019 Knights Belts Spread</h1>
+		<div style="width: 75%; margin: 0 auto;">
+			<canvas id="knights"></canvas>
+        </div>
+
+
+        <hr />
+        <h1 style="text-align: center;">CK - 2019 Knights Activity by Signins</h1>
+		<div style="width: 75%; margin: 0 auto;">
+			<canvas id="knights_att2019"></canvas>
+        </div>
+
+        <hr />
+        <h1 style="text-align: center;">CK - 2018 Knights Activity by Signins</h1>
+		<div style="width: 75%; margin: 0 auto;">
+			<canvas id="knights_att2018"></canvas>
+        </div>
+
+        <hr />
+        <h1 style="text-align: center;">CK - 2017 Knights Activity by Signins</h1>
+		<div style="width: 75%; margin: 0 auto;">
+			<canvas id="knights_att2017"></canvas>
+        </div>
+
+        <hr />
+        <h1 style="text-align: center;">CK - 2016 Knights Activity by Signins</h1>
+		<div style="width: 75%; margin: 0 auto;">
+			<canvas id="knights_att2016"></canvas>
+        </div>
+
+        <hr />
+        <h1 style="text-align: center;">CK - 2015 Knights Activity by Signins</h1>
+		<div style="width: 75%; margin: 0 auto;">
+			<canvas id="knights_att2015"></canvas>
+        </div>
+
+        <hr />
+        <h1 style="text-align: center;">CK - 2014 Knights Activity by Signins</h1>
+		<div style="width: 75%; margin: 0 auto;">
+			<canvas id="knights_att2014"></canvas>
+        </div>
+
+        <hr />
+        <h1 style="text-align: center;">CK - 2013 Knights Activity by Signins</h1>
+		<div style="width: 75%; margin: 0 auto;">
+			<canvas id="knights_att2013"></canvas>
+        </div>
+
+        <hr />
+        <h1 style="text-align: center;">CK - 2012 Knights Activity by Signins</h1>
+		<div style="width: 75%; margin: 0 auto;">
+			<canvas id="knights_att2012"></canvas>
+        </div>
+
+        <hr />
+        <h1 style="text-align: center;">CK - 2011 Knights Activity by Signins</h1>
+		<div style="width: 75%; margin: 0 auto;">
+			<canvas id="knights_att2011"></canvas>
+        </div>
+
+        <hr />
+        <h1 style="text-align: center;">CK - 2010 Knights Activity by Signins</h1>
+		<div style="width: 75%; margin: 0 auto;">
+			<canvas id="knights_att2010"></canvas>
+        </div>
+        <script>
+            var clabels = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Nineth', 'Tenth'];
+            var clabelmasters = ['Masterhood'];
+            var clabelsExtra = ['Unspecified Rank'].concat(clabels);
+            var cbgcolors = {
+                            1980: 'rgba(255, 99, 132, 0.2)',
+                            1981: 'rgba(54, 162, 235, 0.2)',
+                            1982: 'rgba(255, 206, 86, 0.2)',
+                            1983: 'rgba(75, 192, 192, 0.2)',
+                            1984: 'rgba(153, 102, 255, 0.2)',
+                            1985: 'rgba(35, 102, 180, 0.2)',
+                            1986: 'rgba(22, 102, 66, 0.2)',
+                            1987: 'rgba(44, 20, 255, 0.2)',
+                            1988: 'rgba(153, 102, 85, 0.2)',
+                            1989: 'rgba(255, 159, 64, 0.2)',
+                            1990: 'rgba(255, 99, 132, 0.2)',
+                            1991: 'rgba(54, 162, 235, 0.2)',
+                            1992: 'rgba(255, 206, 86, 0.2)',
+                            1993: 'rgba(75, 192, 192, 0.2)',
+                            1994: 'rgba(153, 102, 255, 0.2)',
+                            1995: 'rgba(35, 102, 180, 0.2)',
+                            1996: 'rgba(22, 102, 66, 0.2)',
+                            1997: 'rgba(44, 20, 255, 0.2)',
+                            1998: 'rgba(153, 102, 85, 0.2)',
+                            1999: 'rgba(255, 159, 64, 0.2)',
+                            2000: 'rgba(255, 99, 132, 0.2)',
+                            2001: 'rgba(54, 162, 235, 0.2)',
+                            2002: 'rgba(255, 206, 86, 0.2)',
+                            2003: 'rgba(75, 192, 192, 0.2)',
+                            2004: 'rgba(153, 102, 255, 0.2)',
+                            2005: 'rgba(35, 102, 180, 0.2)',
+                            2006: 'rgba(22, 102, 66, 0.2)',
+                            2007: 'rgba(44, 20, 255, 0.2)',
+                            2008: 'rgba(153, 102, 85, 0.2)',
+                            2009: 'rgba(255, 159, 64, 0.2)',
+                            2010: 'rgba(255, 99, 132, 0.2)',
+                            2011: 'rgba(54, 162, 235, 0.2)',
+                            2012: 'rgba(255, 206, 86, 0.2)',
+                            2013: 'rgba(75, 192, 192, 0.2)',
+                            2014: 'rgba(153, 102, 255, 0.2)',
+                            2015: 'rgba(35, 102, 180, 0.2)',
+                            2016: 'rgba(22, 102, 66, 0.2)',
+                            2017: 'rgba(44, 20, 255, 0.2)',
+                            2018: 'rgba(153, 102, 85, 0.2)',
+                            2019: 'rgba(255, 159, 64, 0.2)'
+        };
+
+            var cbccolors = {
+                            1980: 'rgba(255, 99, 132)',
+                            1981: 'rgba(54, 162, 235)',
+                            1982: 'rgba(255, 206, 86)',
+                            1983: 'rgba(75, 192, 192)',
+                            1984: 'rgba(153, 102, 255)',
+                            1985: 'rgba(35, 102, 180)',
+                            1986: 'rgba(22, 102, 66)',
+                            1987: 'rgba(44, 20, 255)',
+                            1988: 'rgba(153, 102, 85)',
+                            1989: 'rgba(255, 159, 64)',
+                            1990: 'rgba(255, 99, 132)',
+                            1991: 'rgba(54, 162, 235)',
+                            1992: 'rgba(255, 206, 862)',
+                            1993: 'rgba(75, 192, 192)',
+                            1994: 'rgba(153, 102, 255)',
+                            1995: 'rgba(35, 102, 180)',
+                            1996: 'rgba(22, 102, 66)',
+                            1997: 'rgba(44, 20, 255)',
+                            1998: 'rgba(153, 102, 85)',
+                            1999: 'rgba(255, 159, 64)',
+                            2000: 'rgba(255, 99, 132)',
+                            2001: 'rgba(54, 162, 235)',
+                            2002: 'rgba(255, 206, 86)',
+                            2003: 'rgba(75, 192, 192)',
+                            2004: 'rgba(153, 102, 255)',
+                            2005: 'rgba(35, 102, 180)',
+                            2006: 'rgba(22, 102, 66)',
+                            2007: 'rgba(44, 20, 255)',
+                            2008: 'rgba(153, 102, 85)',
+                            2009: 'rgba(255, 159, 64)',
+                            2010: 'rgba(255, 99, 132)',
+                            2011: 'rgba(54, 162, 235)',
+                            2012: 'rgba(255, 206, 86)',
+                            2013: 'rgba(75, 192, 192)',
+                            2014: 'rgba(153, 102, 255)',
+                            2015: 'rgba(35, 102, 180)',
+                            2016: 'rgba(22, 102, 66)',
+                            2017: 'rgba(44, 20, 255)',
+                            2018: 'rgba(153, 102, 85)',
+                            2019: 'rgba(255, 159, 64)'
+            };
+            var cbgcolors2 = [
+                             'rgba(255, 99, 132, 0.2)',
+                             'rgba(54, 162, 235, 0.2)',
+                             'rgba(255, 206, 86, 0.2)',
+                             'rgba(75, 192, 192, 0.2)',
+                             'rgba(153, 102, 255, 0.2)',
+                             'rgba(35, 102, 180, 0.2)',
+                             'rgba(22, 102, 66, 0.2)',
+                             'rgba(44, 20, 255, 0.2)',
+                             'rgba(153, 102, 85, 0.2)',
+                             'rgba(255, 159, 64, 0.2)',
+                             'rgba(255, 99, 132, 0.2)',
+                             'rgba(54, 162, 235, 0.2)',
+                             'rgba(255, 206, 86, 0.2)',
+                             'rgba(75, 192, 192, 0.2)',
+                             'rgba(153, 102, 255, 0.2)',
+                             'rgba(35, 102, 180, 0.2)',
+                             'rgba(22, 102, 66, 0.2)',
+                             'rgba(44, 20, 255, 0.2)',
+                             'rgba(153, 102, 85, 0.2)',
+                             'rgba(255, 159, 64, 0.2)',
+                             'rgba(255, 99, 132, 0.2)',
+                             'rgba(54, 162, 235, 0.2)',
+                             'rgba(255, 206, 86, 0.2)',
+                             'rgba(75, 192, 192, 0.2)',
+                             'rgba(153, 102, 255, 0.2)',
+                             'rgba(35, 102, 180, 0.2)',
+                             'rgba(22, 102, 66, 0.2)',
+                             'rgba(44, 20, 255, 0.2)',
+                            'rgba(153, 102, 85, 0.2)',
+                             'rgba(255, 159, 64, 0.2)',
+                             'rgba(255, 99, 132, 0.2)',
+                             'rgba(54, 162, 235, 0.2)',
+                             'rgba(255, 206, 86, 0.2)',
+                             'rgba(75, 192, 192, 0.2)',
+                             'rgba(153, 102, 255, 0.2)',
+                             'rgba(35, 102, 180, 0.2)',
+                             'rgba(22, 102, 66, 0.2)',
+                             'rgba(44, 20, 255, 0.2)',
+                             'rgba(153, 102, 85, 0.2)',
+                             'rgba(255, 159, 64, 0.2)'
+            ];
+
+
+            var knights2019 = JSON.parse(`[{"persona":"Sir Wilhelm von Eisenwald","attended":55},{"persona":"Lord Sir Latilic","attended":54},{"persona":"Sir Lord Weasel H. Christ","attended":49},{"persona":"Count Thad the Impaler (Thaddigren Dentiata)","attended":48},{"persona":"Ke-She","attended":48},{"persona":"Sir Xenith Magdelene of Garnet Hills","attended":45},{"persona":"Sir Episode Skinrot","attended":40},{"persona":"Alara the Drake","attended":39},{"persona":"Diego Rodolfo Velazquez","attended":34},{"persona":"Nella 'Gekko' Darkblade","attended":32},{"persona":"Lady Ritter Renjara","attended":31},{"persona":"Sir Lord Nightmare Dragonspawn","attended":30},{"persona":"Sir Maniacles","attended":30},{"persona":"Nesta de'Ebonydaryth","attended":20},{"persona":"Sir Malmoria Winters","attended":19},{"persona":"Porthos","attended":17},{"persona":"Defender Chango B. Dass","attended":16},{"persona":"Megiddo, Esq.","attended":16},{"persona":"Sir Balisk","attended":11},{"persona":"Sir Farlo Bloodblade","attended":10},{"persona":"Arch Duke Sir Shadow Dragon Sesshomaru","attended":9},{"persona":"Margul","attended":8},{"persona":"DeMonica (Monkey)","attended":7},{"persona":"Randalf Falconbridge","attended":7},{"persona":"Dame Mistress Wynd o'Onyx Loch von Drakken","attended":5},{"persona":"Sir Father Thomas Von Drakken","attended":5},{"persona":"Imagg Nifeasant","attended":5},{"persona":"Sir Crinos of Darkenthal","attended":4},{"persona":"Sir Theodrick Blackflame","attended":3},{"persona":"Raven Harkonnen","attended":3},{"persona":"Nightlynx / Nietric Hersteller","attended":3},{"persona":"Hertug Sir Bromhir Ethindale-Tannon,  The High Ringgiver","attended":2},{"persona":"Aiolos","attended":1},{"persona":"Sir Rook","attended":1},{"persona":"Isadore","attended":1}]`);
+
+            var knights2018 = JSON.parse(`[{"persona":"Lord Sir Latilic","attended":75},{"persona":"Sir Wilhelm von Eisenwald","attended":73},{"persona":"Ke-She","attended":52},{"persona":"Sir Xenith Magdelene of Garnet Hills","attended":51},{"persona":"Duke Sir Sir Rabanzarelli Ethindalus Harkonnus","attended":50},{"persona":"Sir Lord Weasel H. Christ","attended":50},{"persona":"Count Thad the Impaler (Thaddigren Dentiata)","attended":49},{"persona":"Nella 'Gekko' Darkblade","attended":47},{"persona":"Duke Distan TGD","attended":45},{"persona":"Sir Episode Skinrot","attended":36},{"persona":"Sir Lord Nightmare Dragonspawn","attended":34},{"persona":"Alara the Drake","attended":28},{"persona":"Sir Ian Dracul Kallon","attended":28},{"persona":"Nightlynx / Nietric Hersteller","attended":27},{"persona":"Diego Rodolfo Velazquez","attended":26},{"persona":"Margul","attended":25},{"persona":"Arch Duke Sir Shadow Dragon Sesshomaru","attended":25},{"persona":"Megiddo, Esq.","attended":24},{"persona":"Lady Ritter Renjara","attended":22},{"persona":"Sir Farlo Bloodblade","attended":22},{"persona":"Isadore","attended":21},{"persona":"Randalf Falconbridge","attended":21},{"persona":"Sir Balisk","attended":20},{"persona":"Sir Maniacles","attended":17},{"persona":"Nesta de'Ebonydaryth","attended":11},{"persona":"Defender Chango B. Dass","attended":9},{"persona":"Snake Bite Grimwulff","attended":7},{"persona":"Sir Theodrick Blackflame","attended":5},{"persona":"Sir Father Thomas Von Drakken","attended":4},{"persona":"Dame Mistress Wynd o'Onyx Loch von Drakken","attended":4},{"persona":"Countess Scarlet Ethindale","attended":3},{"persona":"Sir Crinos of Darkenthal","attended":3},{"persona":"Baronet Thun Dayne","attended":3},{"persona":"Aylia Greenfire","attended":2},{"persona":"Vigus Nethrac fatbelly","attended":1},{"persona":"Sir Baggera Rex","attended":1},{"persona":"Baron Sir Katzu Farquestor","attended":1},{"persona":"Sir Greylin MacMoran Silverstar","attended":1},{"persona":"Imagg Nifeasant","attended":1},{"persona":"Linden Tul","attended":1},{"persona":"Sir Duke Zircon","attended":1},{"persona":"Raven Harkonnen","attended":1},{"persona":"Sir Lord Baron Emanon","attended":1}]`);
+
+            var knights2017 = JSON.parse(`[{"persona":"Duke Sir Sir Rabanzarelli Ethindalus Harkonnus","attended":99},{"persona":"Sir Wilhelm von Eisenwald","attended":67},{"persona":"Ke-She","attended":57},{"persona":"Count Thad the Impaler (Thaddigren Dentiata)","attended":52},{"persona":"Sir Ian Dracul Kallon","attended":44},{"persona":"Sir Lord Weasel H. Christ","attended":38},{"persona":"Sir Xenith Magdelene of Garnet Hills","attended":38},{"persona":"Sir Farlo Bloodblade","attended":34},{"persona":"Sir Lord Nightmare Dragonspawn","attended":32},{"persona":"Nightlynx / Nietric Hersteller","attended":31},{"persona":"Diego Rodolfo Velazquez","attended":29},{"persona":"Randalf Falconbridge","attended":26},{"persona":"Sir Balisk","attended":23},{"persona":"Snake Bite Grimwulff","attended":23},{"persona":"Megiddo, Esq.","attended":20},{"persona":"Margul","attended":13},{"persona":"Nesta de'Ebonydaryth","attended":13},{"persona":"Arch Duke Sir Shadow Dragon Sesshomaru","attended":11},{"persona":"Nella 'Gekko' Darkblade","attended":10},{"persona":"Sir Theodrick Blackflame","attended":9},{"persona":"Sir Duke Zircon","attended":7},{"persona":"Sir Lockland","attended":3},{"persona":"Sir Greylin MacMoran Silverstar","attended":3},{"persona":"Sir Maniacles","attended":2},{"persona":"Raven Harkonnen","attended":2},{"persona":"Sir Pebyr ap Cucorin","attended":2},{"persona":"Aiolos","attended":2},{"persona":"Porthos","attended":2},{"persona":"Dame Mistress Wynd o'Onyx Loch von Drakken","attended":1},{"persona":"Grand Duke Sir Lieutenant Colonel Macleod Darkjester","attended":1},{"persona":"Sir Brother Stephon","attended":1},{"persona":"Sir Rook","attended":1},{"persona":"Sir Father Thomas Von Drakken","attended":1},{"persona":"Sir Baggera Rex","attended":1},{"persona":"Countess Scarlet Ethindale","attended":1},{"persona":"Vera O'Cherna Rosetta","attended":1},{"persona":"Phinneus / Thal Grimwulf","attended":1}]`);
+
+            var knights2016 = JSON.parse(`[{"persona":"Count Thad the Impaler (Thaddigren Dentiata)","attended":55},{"persona":"Sir Wilhelm von Eisenwald","attended":51},{"persona":"Ke-She","attended":42},{"persona":"Sir Lord Weasel H. Christ","attended":37},{"persona":"Nightlynx / Nietric Hersteller","attended":35},{"persona":"Sir Xenith Magdelene of Garnet Hills","attended":33},{"persona":"Snake Bite Grimwulff","attended":31},{"persona":"Nella 'Gekko' Darkblade","attended":30},{"persona":"Duke Sir Sir Rabanzarelli Ethindalus Harkonnus","attended":25},{"persona":"Diego Rodolfo Velazquez","attended":24},{"persona":"Sir Farlo Bloodblade","attended":18},{"persona":"Arch Duke Sir Shadow Dragon Sesshomaru","attended":17},{"persona":"Sir Lockland","attended":14},{"persona":"Nesta de'Ebonydaryth","attended":13},{"persona":"Aiolos","attended":12},{"persona":"Sir Ian Dracul Kallon","attended":11},{"persona":"Sir Theodrick Blackflame","attended":9},{"persona":"Sir Lord Nightmare Dragonspawn","attended":9},{"persona":"Sir Pebyr ap Cucorin","attended":8},{"persona":"Sir Baggera Rex","attended":8},{"persona":"Baron Sir Katzu Farquestor","attended":7},{"persona":"Randalf Falconbridge","attended":7},{"persona":"Sir Rook","attended":7},{"persona":"Megiddo, Esq.","attended":6},{"persona":"Sir Duke Zircon","attended":6},{"persona":"Sir Greylin MacMoran Silverstar","attended":4},{"persona":"Raven Harkonnen","attended":3},{"persona":"Defender Chango B. Dass","attended":3},{"persona":"Phinneus / Thal Grimwulf","attended":3},{"persona":"Porthos","attended":2},{"persona":"Sir Maniacles","attended":2},{"persona":"Countess Sir Yonnah ap Stormblade-Darkjester","attended":1},{"persona":"Sir Brother Stephon","attended":1}]`);
+
+            var knights2015 = JSON.parse(`[{"persona":"Count Thad the Impaler (Thaddigren Dentiata)","attended":62},{"persona":"Sir Wilhelm von Eisenwald","attended":58},{"persona":"Ke-She","attended":54},{"persona":"Arch Duke Sir Shadow Dragon Sesshomaru","attended":43},{"persona":"Nella 'Gekko' Darkblade","attended":34},{"persona":"Nightlynx / Nietric Hersteller","attended":33},{"persona":"Diego Rodolfo Velazquez","attended":33},{"persona":"Sir Lord Weasel H. Christ","attended":31},{"persona":"Aiolos","attended":30},{"persona":"Sir Ian Dracul Kallon","attended":25},{"persona":"Sir Xenith Magdelene of Garnet Hills","attended":24},{"persona":"Duke Sir Sir Rabanzarelli Ethindalus Harkonnus","attended":22},{"persona":"Sir Rook","attended":21},{"persona":"Snake Bite Grimwulff","attended":19},{"persona":"Sir Lockland","attended":15},{"persona":"Nesta de'Ebonydaryth","attended":14},{"persona":"Sir Theodrick Blackflame","attended":13},{"persona":"Sir Baggera Rex","attended":13},{"persona":"Dame Mistress Wynd o'Onyx Loch von Drakken","attended":12},{"persona":"Sir Father Thomas Von Drakken","attended":12},{"persona":"Sir Lord Nightmare Dragonspawn","attended":12},{"persona":"Sir Farlo Bloodblade","attended":10},{"persona":"Megiddo, Esq.","attended":8},{"persona":"Raven Harkonnen","attended":8},{"persona":"Duke Lord Sir Kyrupt Desmodeus","attended":6},{"persona":"Sir Duke Zircon","attended":6},{"persona":"Phinneus / Thal Grimwulf","attended":5},{"persona":"Stoney Rose","attended":4},{"persona":"Amorden","attended":3},{"persona":"Defender Chango B. Dass","attended":3},{"persona":"Sir Maniacles","attended":3},{"persona":"Baron Sir Katzu Farquestor","attended":3},{"persona":"Baronet Thun Dayne","attended":2},{"persona":"Sir Greylin MacMoran Silverstar","attended":2},{"persona":"Sir Pebyr ap Cucorin","attended":1},{"persona":"Ween Bloodblade","attended":1},{"persona":"Porthos","attended":1},{"persona":"Sir Crinos of Darkenthal","attended":1},{"persona":"Sylvanista de'Ebonydaryth","attended":1},{"persona":"Sir Lord Shaggy","attended":1},{"persona":"Countess Scarlet Ethindale","attended":1},{"persona":"Alara the Drake","attended":1},{"persona":"Aylia Greenfire","attended":1}]`);
+
+            var knights2014 = JSON.parse(`[{"persona":"Count Thad the Impaler (Thaddigren Dentiata)","attended":51},{"persona":"Sir Wilhelm von Eisenwald","attended":50},{"persona":"Aiolos","attended":48},{"persona":"Nella 'Gekko' Darkblade","attended":45},{"persona":"Sir Ian Dracul Kallon","attended":42},{"persona":"Ke-She","attended":39},{"persona":"Nightlynx / Nietric Hersteller","attended":37},{"persona":"Nesta de'Ebonydaryth","attended":34},{"persona":"Diego Rodolfo Velazquez","attended":34},{"persona":"Sir Rook","attended":29},{"persona":"Snake Bite Grimwulff","attended":27},{"persona":"Sir Lord Weasel H. Christ","attended":24},{"persona":"Arch Duke Sir Shadow Dragon Sesshomaru","attended":22},{"persona":"Sir Xenith Magdelene of Garnet Hills","attended":20},{"persona":"Baron Sir Katzu Farquestor","attended":19},{"persona":"Sir Farlo Bloodblade","attended":18},{"persona":"Sir Lord Nightmare Dragonspawn","attended":15},{"persona":"Alara the Drake","attended":14},{"persona":"Duke Sir Sir Rabanzarelli Ethindalus Harkonnus","attended":13},{"persona":"Raven Harkonnen","attended":9},{"persona":"Sir Baggera Rex","attended":7},{"persona":"Phinneus / Thal Grimwulf","attended":7},{"persona":"Scotty Wyngarde","attended":6},{"persona":"Defender Chango B. Dass","attended":6},{"persona":"Sir Theodrick Blackflame","attended":6},{"persona":"Sir Crinos of Darkenthal","attended":6},{"persona":"Amorden","attended":4},{"persona":"Sylvanista de'Ebonydaryth","attended":3},{"persona":"Stoney Rose","attended":3},{"persona":"Duke Lord Sir Kyrupt Desmodeus","attended":3},{"persona":"Megiddo, Esq.","attended":2},{"persona":"Countess Scarlet Ethindale","attended":2},{"persona":"Linden Tul","attended":2},{"persona":"Sir Duke Zircon","attended":2},{"persona":"Imagg Nifeasant","attended":1},{"persona":"Sir Brother Stephon","attended":1},{"persona":"Voltar Ironwolf","attended":1},{"persona":"Baronet Thun Dayne","attended":1},{"persona":"Countess Sir Yonnah ap Stormblade-Darkjester","attended":1}]`);
+
+            var knights2013 = JSON.parse(`[{"persona":"Nella 'Gekko' Darkblade","attended":69},{"persona":"Sir Wilhelm von Eisenwald","attended":48},{"persona":"Sir Farlo Bloodblade","attended":41},{"persona":"Diego Rodolfo Velazquez","attended":41},{"persona":"Ke-She","attended":41},{"persona":"Duke Sir Sir Rabanzarelli Ethindalus Harkonnus","attended":30},{"persona":"Sir Xenith Magdelene of Garnet Hills","attended":29},{"persona":"Sir Lord Weasel H. Christ","attended":29},{"persona":"Alara the Drake","attended":27},{"persona":"Amorden","attended":26},{"persona":"Sylvanista de'Ebonydaryth","attended":25},{"persona":"Arch Duke Sir Shadow Dragon Sesshomaru","attended":23},{"persona":"Sir Father Thomas Von Drakken","attended":18},{"persona":"Sir Baggera Rex","attended":18},{"persona":"Dame Mistress Wynd o'Onyx Loch von Drakken","attended":18},{"persona":"Raven Harkonnen","attended":18},{"persona":"Sir Lord Kanin T Pirate","attended":17},{"persona":"Sir Crinos of Darkenthal","attended":17},{"persona":"Sir Ian Dracul Kallon","attended":16},{"persona":"Countess Sir Yonnah ap Stormblade-Darkjester","attended":15},{"persona":"Voltar Ironwolf","attended":14},{"persona":"Sir Duke Zircon","attended":10},{"persona":"Defender Chango B. Dass","attended":10},{"persona":"Grendel","attended":6},{"persona":"Countess Scarlet Ethindale","attended":5},{"persona":"Phinneus / Thal Grimwulf","attended":4},{"persona":"Sir Rook","attended":4},{"persona":"Grand Duke Sir Lieutenant Colonel Macleod Darkjester","attended":4},{"persona":"Sir Theodrick Blackflame","attended":4},{"persona":"Aessic di'Mortis","attended":4},{"persona":"Linden Tul","attended":3},{"persona":"Nightlynx / Nietric Hersteller","attended":2},{"persona":"Sir Brother Stephon","attended":2},{"persona":"Megiddo, Esq.","attended":2},{"persona":"Sir Lord Shaggy","attended":1},{"persona":"Warlock","attended":1},{"persona":"Imagg Nifeasant","attended":1},{"persona":"Sir Pebyr ap Cucorin","attended":1}]`);
+
+            var knights2012 = JSON.parse(`[{"persona":"Sir Baggera Rex","attended":51},{"persona":"Sir Wilhelm von Eisenwald","attended":42},{"persona":"Amorden","attended":38},{"persona":"Sir Xenith Magdelene of Garnet Hills","attended":36},{"persona":"Sir Farlo Bloodblade","attended":35},{"persona":"Diego Rodolfo Velazquez","attended":33},{"persona":"Arch Duke Sir Shadow Dragon Sesshomaru","attended":30},{"persona":"Dame Mistress Wynd o'Onyx Loch von Drakken","attended":30},{"persona":"Sir Father Thomas Von Drakken","attended":28},{"persona":"Alara the Drake","attended":27},{"persona":"Sylvanista de'Ebonydaryth","attended":25},{"persona":"Voltar Ironwolf","attended":23},{"persona":"Ke-She","attended":22},{"persona":"Sir Crinos of Darkenthal","attended":22},{"persona":"Sir Lord Weasel H. Christ","attended":21},{"persona":"Sir Lord Kanin T Pirate","attended":20},{"persona":"Sir Theodrick Blackflame","attended":19},{"persona":"Linden Tul","attended":18},{"persona":"Grendel","attended":17},{"persona":"Countess Sir Yonnah ap Stormblade-Darkjester","attended":15},{"persona":"Sir Rook","attended":14},{"persona":"Countess Scarlet Ethindale","attended":14},{"persona":"Sir Duke Zircon","attended":13},{"persona":"Raven Harkonnen","attended":12},{"persona":"Grand Duke Sir Lieutenant Colonel Macleod Darkjester","attended":10},{"persona":"Phinneus / Thal Grimwulf","attended":9},{"persona":"Defender Chango B. Dass","attended":8},{"persona":"Aessic di'Mortis","attended":7},{"persona":"Duke Sir Sir Rabanzarelli Ethindalus Harkonnus","attended":6},{"persona":"Warlock","attended":6},{"persona":"Sir Lord Shaggy","attended":4},{"persona":"Duke Lord Sir Kyrupt Desmodeus","attended":3},{"persona":"Baronet Thun Dayne","attended":2},{"persona":"Randalf Falconbridge","attended":2},{"persona":"Sir Freeman Noranada","attended":1},{"persona":"Imagg Nifeasant","attended":1},{"persona":"Aylia Greenfire","attended":1},{"persona":"Chado","attended":1},{"persona":"Sir Brother Stephon","attended":1}]`);
+
+            var knights2011 = JSON.parse(`[{"persona":"Sylvanista de'Ebonydaryth","attended":45},{"persona":"Aessic di'Mortis","attended":43},{"persona":"Sir Xenith Magdelene of Garnet Hills","attended":39},{"persona":"Arch Duke Sir Shadow Dragon Sesshomaru","attended":38},{"persona":"Alara the Drake","attended":37},{"persona":"Sir Farlo Bloodblade","attended":36},{"persona":"Sir Crinos of Darkenthal","attended":32},{"persona":"Sir Baggera Rex","attended":32},{"persona":"Dame Mistress Wynd o'Onyx Loch von Drakken","attended":30},{"persona":"Sir Father Thomas Von Drakken","attended":30},{"persona":"Sir Lord Weasel H. Christ","attended":28},{"persona":"Voltar Ironwolf","attended":28},{"persona":"Diego Rodolfo Velazquez","attended":27},{"persona":"Sir Lord Shaggy","attended":27},{"persona":"Dame Morganna Darkjester","attended":26},{"persona":"Sir Wilhelm von Eisenwald","attended":25},{"persona":"Countess Sir Yonnah ap Stormblade-Darkjester","attended":24},{"persona":"Sir Duke Zircon","attended":21},{"persona":"Warlock","attended":21},{"persona":"Grendel","attended":20},{"persona":"Linden Tul","attended":17},{"persona":"Ke-She","attended":15},{"persona":"Defender Chango B. Dass","attended":12},{"persona":"Sir Ian Dracul Kallon","attended":12},{"persona":"Phinneus / Thal Grimwulf","attended":12},{"persona":"Raven Harkonnen","attended":11},{"persona":"Amorden","attended":10},{"persona":"Sir Theodrick Blackflame","attended":10},{"persona":"Sir Lord Kanin T Pirate","attended":8},{"persona":"Duke Lord Sir Kyrupt Desmodeus","attended":7},{"persona":"Sir Freeman Noranada","attended":7},{"persona":"Randalf Falconbridge","attended":6},{"persona":"Kaderian","attended":6},{"persona":"Lynae DuBois","attended":5},{"persona":"Sir Rook","attended":5},{"persona":"Imagg Nifeasant","attended":4},{"persona":"Stoney Rose","attended":3},{"persona":"Sir Brother Stephon","attended":3},{"persona":"Duke Sir Sir Rabanzarelli Ethindalus Harkonnus","attended":3},{"persona":"Grand Duke Sir Lieutenant Colonel Macleod Darkjester","attended":2},{"persona":"Sir Athisdaine Montoya XVI","attended":2},{"persona":"Vigus Nethrac fatbelly","attended":2},{"persona":"Lady Fael Succeed Sanguine Dracul","attended":1},{"persona":"Hertug Sir Bromhir Ethindale-Tannon,  The High Ringgiver","attended":1},{"persona":"Sir Arion Reinquist","attended":1}]`);
+
+            var knights2010 = JSON.parse(`[{"persona":"Sir Wilhelm von Eisenwald","attended":37},{"persona":"Ke-She","attended":35},{"persona":"Sir Xenith Magdelene of Garnet Hills","attended":35},{"persona":"Sir Farlo Bloodblade","attended":32},{"persona":"Warlock","attended":26},{"persona":"Duke Lord Sir Kyrupt Desmodeus","attended":25},{"persona":"Diego Rodolfo Velazquez","attended":25},{"persona":"Sir Father Thomas Von Drakken","attended":25},{"persona":"Phinneus / Thal Grimwulf","attended":23},{"persona":"Dame Mistress Wynd o'Onyx Loch von Drakken","attended":23},{"persona":"Sir Duke Zircon","attended":20},{"persona":"Sir Lord Weasel H. Christ","attended":17},{"persona":"Sylvanista de'Ebonydaryth","attended":17},{"persona":"Sir Pebyr ap Cucorin","attended":12},{"persona":"Sir Lord Kanin T Pirate","attended":11},{"persona":"Hertug Sir Bromhir Ethindale-Tannon,  The High Ringgiver","attended":11},{"persona":"Defender Chango B. Dass","attended":11},{"persona":"Lynae DuBois","attended":11},{"persona":"Voltar Ironwolf","attended":10},{"persona":"Baronet Thun Dayne","attended":8},{"persona":"Sir Brother Stephon","attended":8},{"persona":"Countess Sir Yonnah ap Stormblade-Darkjester","attended":7},{"persona":"Raven Harkonnen","attended":7},{"persona":"Sir Rook","attended":6},{"persona":"Sir Baggera Rex","attended":6},{"persona":"Alara the Drake","attended":5},{"persona":"Sir Freeman Noranada","attended":5},{"persona":"Stoney Rose","attended":5},{"persona":"Grand Duke Sir Lieutenant Colonel Macleod Darkjester","attended":5},{"persona":"Sir Crinos of Darkenthal","attended":5},{"persona":"Linden Tul","attended":5},{"persona":"Amorden","attended":4},{"persona":"Randalf Falconbridge","attended":4},{"persona":"Aylia Greenfire","attended":4},{"persona":"Mandigore","attended":3},{"persona":"Lady Fael Succeed Sanguine Dracul","attended":3},{"persona":"Sir Athisdaine Montoya XVI","attended":3},{"persona":"Vigus Nethrac fatbelly","attended":2},{"persona":"Sir Theodrick Blackflame","attended":2},{"persona":"Dame Morganna Darkjester","attended":2},{"persona":"Sir Greylin MacMoran Silverstar","attended":1},{"persona":"Sir Maniacles","attended":1},{"persona":"Vera O'Cherna Rosetta","attended":1},{"persona":"Sir Wolfbane","attended":1},{"persona":"Grendel","attended":1}]`);
+
+            new Chart(document.getElementById("knights_att2019"), {
+                "type": "polarArea",
+                "data": {
+                    "labels": knights2019.map(function (arr, i, z) {return z[i].persona.replace(/[^\w\s]/gi, '');}),
+                    "datasets": [{
+                        "label": "CK Knights Attendance 2019",
+                        "data": knights2019.map(function (arr, i, z) {return z[i].attended;}),
+                        "backgroundColor": cbgcolors2
+                    }]
+                }
+            });
+
+
+            new Chart(document.getElementById("knights_att2018"), {
+                "type": "polarArea",
+                "data": {
+                    "labels": knights2018.map(function (arr, i, z) {return z[i].persona.replace(/[^\w\s]/gi, '');}),
+                    "datasets": [{
+                        "label": "CK Knights Attendance 2018",
+                        "data": knights2018.map(function (arr, i, z) {return z[i].attended;}),
+                        "backgroundColor": cbgcolors2
+                    }]
+                }
+            });
+
+            new Chart(document.getElementById("knights_att2017"), {
+                "type": "polarArea",
+                "data": {
+                    "labels": knights2017.map(function (arr, i, z) {return z[i].persona.replace(/[^\w\s]/gi, '');}),
+                    "datasets": [{
+                        "label": "CK Knights Attendance 2017",
+                        "data": knights2017.map(function (arr, i, z) {return z[i].attended;}),
+                        "backgroundColor": cbgcolors2
+                    }]
+                }
+            });
+
+            new Chart(document.getElementById("knights_att2016"), {
+                "type": "polarArea",
+                "data": {
+                    "labels": knights2016.map(function (arr, i, z) {return z[i].persona.replace(/[^\w\s]/gi, '');}),
+                    "datasets": [{
+                        "label": "CK Knights Attendance 2016",
+                        "data": knights2016.map(function (arr, i, z) {return z[i].attended;}),
+                        "backgroundColor": cbgcolors2
+                    }]
+                }
+            });
+
+            new Chart(document.getElementById("knights_att2015"), {
+                "type": "polarArea",
+                "data": {
+                    "labels": knights2015.map(function (arr, i, z) {return z[i].persona.replace(/[^\w\s]/gi, '');}),
+                    "datasets": [{
+                        "label": "CK Knights Attendance 2015",
+                        "data": knights2015.map(function (arr, i, z) {return z[i].attended;}),
+                        "backgroundColor": cbgcolors2
+                    }]
+                }
+            });
+
+            new Chart(document.getElementById("knights_att2014"), {
+                "type": "polarArea",
+                "data": {
+                    "labels": knights2014.map(function (arr, i, z) {return z[i].persona.replace(/[^\w\s]/gi, '');}),
+                    "datasets": [{
+                        "label": "CK Knights Attendance 2014",
+                        "data": knights2014.map(function (arr, i, z) {return z[i].attended;}),
+                        "backgroundColor": cbgcolors2
+                    }]
+                }
+            });
+
+            new Chart(document.getElementById("knights_att2013"), {
+                "type": "polarArea",
+                "data": {
+                    "labels": knights2013.map(function (arr, i, z) {return z[i].persona.replace(/[^\w\s]/gi, '');}),
+                    "datasets": [{
+                        "label": "CK Knights Attendance 2013",
+                        "data": knights2013.map(function (arr, i, z) {return z[i].attended;}),
+                        "backgroundColor": cbgcolors2
+                    }]
+                }
+            });
+
+            new Chart(document.getElementById("knights_att2012"), {
+                "type": "polarArea",
+                "data": {
+                    "labels": knights2012.map(function (arr, i, z) {return z[i].persona.replace(/[^\w\s]/gi, '');}),
+                    "datasets": [{
+                        "label": "CK Knights Attendance 2012",
+                        "data": knights2012.map(function (arr, i, z) {return z[i].attended;}),
+                        "backgroundColor": cbgcolors2
+                    }]
+                }
+            });
+
+            new Chart(document.getElementById("knights_att2011"), {
+                "type": "polarArea",
+                "data": {
+                    "labels": knights2011.map(function (arr, i, z) {return z[i].persona.replace(/[^\w\s]/gi, '');}),
+                    "datasets": [{
+                        "label": "CK Knights Attendance 2011",
+                        "data": knights2011.map(function (arr, i, z) {return z[i].attended;}),
+                        "backgroundColor": cbgcolors2
+                    }]
+                }
+            });
+
+            new Chart(document.getElementById("knights_att2010"), {
+                "type": "polarArea",
+                "data": {
+                    "labels": knights2010.map(function (arr, i, z) {return z[i].persona.replace(/[^\w\s]/gi, '');}),
+                    "datasets": [{
+                        "label": "CK Knights Attendance 2010",
+                        "data": knights2010.map(function (arr, i, z) {return z[i].attended;}),
+                        "backgroundColor": cbgcolors2
+                    }]
+                }
+            });
+
+            var clabels = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Nineth', 'Tenth', 'Masterhood'];
+
+
+
+
+            new Chart(document.getElementById("knights"), {
+                "type": "doughnut",
+                "data": {
+                    "labels": ["Flame", "Sword", "Crown", "Serpent"],
+                    "datasets": [{
+                        "label": "CK Knights",
+                        "data": [72, 18, 30, 28],
+                        "backgroundColor": ["rgb(255, 99, 132)", "rgb(54, 162, 235)", "rgb(255, 205, 86)", "rgb(34,139,34)"]
+                    }]
+                }
+            });
+		</script>
+	</body>
+</html>
